@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: KingsVille
+        psr4_prefix: KingsVille
+        src_path: app

@@ -1,0 +1,72 @@
+body {
+    background: #fcfcfc;
+}
+
+.side-nav li {
+    transition: all 0.3s ease;
+}
+
+.side-nav li:hover {
+    background: #0277bd;
+    transition: all 0.3s ease;
+}
+
+li.logo {
+    margin-top: 32px;
+    margin-bottom: 16px;
+    padding: 0;
+    text-align: center;
+    
+}
+
+li.logo a {
+    line-height: 32px;
+}
+
+li.logo:hover {
+    background: none;
+}
+
+.brand-icon {
+    font-size: 32px;
+}
+
+.side-nav .bold a{
+    font-size: 18px;
+    color: #fff;
+}
+
+.content {
+    margin-left: 240px;
+    padding: 20px;
+    position:relative;
+}
+
+.search-user--container {
+    z-index: 3;
+}
+.search-user--submit {
+    margin-top: 26px;
+    z-index: 1;
+}
+
+.user--create-new {
+    margin-top: 24px;
+}
+
+table {
+    font-size: 13px;
+}
+
+.account-info {
+    overflow:visible;
+    z-index: 99;
+}
+
+.success-info h5{
+    margin: 30px 0;
+}
+
+.go-back {
+    margin: 30px 0;
+}
