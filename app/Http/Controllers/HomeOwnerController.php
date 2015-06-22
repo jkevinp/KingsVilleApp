@@ -9,8 +9,8 @@ class HomeOwnerController extends Controller {
 		$this->homeOwner = $hoc;
 	}
 	public function index(){
-		$users = $this->homeOwner->count();
-		return view('default.blade.index');
+		$users = $this->homeOwner->all();
+		return view('default.blade.index')->with('users' , $users);
 	}
 	public function create(){
 		return view('default.blade.create');
