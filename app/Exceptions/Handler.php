@@ -1,4 +1,4 @@
-<?php namespace KingsVille\Exceptions;
+<?php namespace KingsVilleApp\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;

@@ -1,5 +1,5 @@
 suites:
     main:
-        namespace: KingsVille
-        psr4_prefix: KingsVille
+        namespace: KingsVilleApp
+        psr4_prefix: KingsVilleApp
         src_path: app

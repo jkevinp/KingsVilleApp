@@ -1,5 +1,5 @@
 <?php 
-namespace KingsVille;
+namespace KingsVilleApp;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;

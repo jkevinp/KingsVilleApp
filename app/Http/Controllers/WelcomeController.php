@@ -1,4 +1,4 @@
-<?php namespace KingsVille\Http\Controllers;
+<?php namespace KingsVilleApp\Http\Controllers;
 
 class WelcomeController extends Controller {
 

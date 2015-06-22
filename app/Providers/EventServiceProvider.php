@@ -1,4 +1,4 @@
-<?php namespace KingsVille\Providers;
+<?php namespace KingsVilleApp\Providers;
 
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;

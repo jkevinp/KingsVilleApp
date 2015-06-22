@@ -1,4 +1,4 @@
-<?php namespace KingsVille\Commands;
+<?php namespace KingsVilleApp\Commands;
 
 abstract class Command {
 

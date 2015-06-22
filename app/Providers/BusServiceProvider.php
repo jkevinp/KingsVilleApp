@@ -1,4 +1,4 @@
-<?php namespace KingsVille\Providers;
+<?php namespace KingsVilleApp\Providers;
 
 use Illuminate\Bus\Dispatcher;
 use Illuminate\Support\ServiceProvider;
@@ -16,7 +16,7 @@ class BusServiceProvider extends ServiceProvider {
 		$dispatcher->mapUsing(function($command)
 		{
 			return Dispatcher::simpleMapping(
-				$command, 'KingsVille\Commands', 'KingsVille\Handlers\Commands'
+				$command, 'KingsVilleApp\Commands', 'KingsVilleApp\Handlers\Commands'
 			);
 		});
 	}

@@ -1,4 +1,4 @@
-<?php namespace KingsVille\Http;
+<?php namespace KingsVilleApp\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -15,7 +15,7 @@ class Kernel extends HttpKernel {
 		'Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse',
 		'Illuminate\Session\Middleware\StartSession',
 		'Illuminate\View\Middleware\ShareErrorsFromSession',
-		'KingsVille\Http\Middleware\VerifyCsrfToken',
+		'KingsVilleApp\Http\Middleware\VerifyCsrfToken',
 	];
 
 	/**
@@ -24,9 +24,9 @@ class Kernel extends HttpKernel {
 	 * @var array
 	 */
 	protected $routeMiddleware = [
-		'auth' => 'KingsVille\Http\Middleware\Authenticate',
+		'auth' => 'KingsVilleApp\Http\Middleware\Authenticate',
 		'auth.basic' => 'Illuminate\Auth\Middleware\AuthenticateWithBasicAuth',
-		'guest' => 'KingsVille\Http\Middleware\RedirectIfAuthenticated',
+		'guest' => 'KingsVilleApp\Http\Middleware\RedirectIfAuthenticated',
 	];
 
 }

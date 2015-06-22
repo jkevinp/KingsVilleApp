@@ -1,6 +1,6 @@
-<?php namespace KingsVille\Http\Controllers;
+<?php namespace KingsVilleApp\Http\Controllers;
 
-use KingsVille\User;
+use KingsVilleApp\User;
 
 class HomeController extends Controller {
 

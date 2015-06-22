@@ -1,4 +1,4 @@
-<?php namespace KingsVille\Console\Commands;
+<?php namespace KingsVilleApp\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Inspiring;

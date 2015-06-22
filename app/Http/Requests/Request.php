@@ -1,4 +1,4 @@
-<?php namespace KingsVille\Http\Requests;
+<?php namespace KingsVilleApp\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 

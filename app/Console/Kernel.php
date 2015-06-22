@@ -1,4 +1,4 @@
-<?php namespace KingsVille\Console;
+<?php namespace KingsVilleApp\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -11,7 +11,7 @@ class Kernel extends ConsoleKernel {
 	 * @var array
 	 */
 	protected $commands = [
-		'KingsVille\Console\Commands\Inspire',
+		'KingsVilleApp\Console\Commands\Inspire',
 	];
 
 	/**

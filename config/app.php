@@ -139,11 +139,11 @@ return [
 		/*
 		 * Application Service Providers...
 		 */
-		'KingsVille\Providers\AppServiceProvider',
-		'KingsVille\Providers\BusServiceProvider',
-		'KingsVille\Providers\ConfigServiceProvider',
-		'KingsVille\Providers\EventServiceProvider',
-		'KingsVille\Providers\RouteServiceProvider',
+		'KingsVilleApp\Providers\AppServiceProvider',
+		'KingsVilleApp\Providers\BusServiceProvider',
+		'KingsVilleApp\Providers\ConfigServiceProvider',
+		'KingsVilleApp\Providers\EventServiceProvider',
+		'KingsVilleApp\Providers\RouteServiceProvider',
 
 	],
 

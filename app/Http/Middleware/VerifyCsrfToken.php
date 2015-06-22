@@ -1,4 +1,4 @@
-<?php namespace KingsVille\Http\Middleware;
+<?php namespace KingsVilleApp\Http\Middleware;
 
 use Closure;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as BaseVerifier;

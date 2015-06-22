@@ -1,7 +1,9 @@
-<?php namespace KingsVille\Providers;
+<?php namespace KingsVilleApp\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
+use KingsVilleApp\Repositories\Eloquent\EloquentHomeOwnerRepository;
+use KingsVilleApp\Repositories\Contracts\HomeOwnerContract;
 class AppServiceProvider extends ServiceProvider {
 
 	/**
@@ -27,8 +29,10 @@ class AppServiceProvider extends ServiceProvider {
 	{
 		$this->app->bind(
 			'Illuminate\Contracts\Auth\Registrar',
-			'KingsVille\Services\Registrar'
+			'KingsVilleApp\Services\Registrar'
 		);
+		$this->app->bind('KingsVilleApp\Repositories\Contracts\HomeOwnerContract',
+						 'KingsVilleApp\Repositories\Eloquent\EloquentHomeOwnerRepository');
 	}
 
 }

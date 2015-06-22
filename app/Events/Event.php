@@ -1,4 +1,4 @@
-<?php namespace KingsVille\Events;
+<?php namespace KingsVilleApp\Events;
 
 abstract class Event {
 

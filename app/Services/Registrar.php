@@ -1,6 +1,6 @@
-<?php namespace KingsVille\Services;
+<?php namespace KingsVilleApp\Services;
 
-use KingsVille\User;
+use KingsVilleApp\User;
 use Validator;
 use Illuminate\Contracts\Auth\Registrar as RegistrarContract;
 

@@ -16,7 +16,9 @@
 			"database"
 		],
 		"psr-4": {
-			"KingsVille\\": "app/"
+			"KingsVilleApp\\": "app/",
+			"KingsVilleApp\\Repositories\\Contracts\\": "app/Repositories/Contracts/",
+			"KingsVilleApp\\Repositories\\Eloquent\\": "app/Repositories/Eloquent/"
 		}
 	},
 	"autoload-dev": {

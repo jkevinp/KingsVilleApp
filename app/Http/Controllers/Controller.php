@@ -1,4 +1,4 @@
-<?php namespace KingsVille\Http\Controllers;
+<?php namespace KingsVilleApp\Http\Controllers;
 
 use Illuminate\Foundation\Bus\DispatchesCommands;
 use Illuminate\Routing\Controller as BaseController;
