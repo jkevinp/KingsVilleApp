@@ -144,6 +144,7 @@ return [
 		'KingsVilleApp\Providers\ConfigServiceProvider',
 		'KingsVilleApp\Providers\EventServiceProvider',
 		'KingsVilleApp\Providers\RouteServiceProvider',
+		'Collective\Html\HtmlServiceProvider',//Form Builder
 
 	],
 
@@ -192,6 +193,8 @@ return [
 		'URL'       => 'Illuminate\Support\Facades\URL',
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
+		'Form' 		=> 'Collective\Html\FormFacade', /* FORM */
+      	'Html'		=> 'Collective\Html\HtmlFacade', /*BUILDER */
 
 	],
 

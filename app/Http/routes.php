@@ -12,8 +12,13 @@
 */
 Route::get('/index', 'HomeOwnerController@index');
 Route::get('/',  ['uses' => 'HomeOwnerController@index' , 'as' => 'HomeOwner.index']);
+
 Route::get('/create', ['uses' => 'HomeOwnerController@create' , 'as' => 'HomeOwner.create']);
+Route::get('/create', ['uses' => 'HomeOwnerController@search' , 'as' => 'HomeOwner.search']);
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
+Route::group(['prefix' => 'default'] , function(){
+   
+});

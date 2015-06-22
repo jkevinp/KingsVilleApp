@@ -18,4 +18,13 @@ class HomeOwnerController extends Controller {
 	public function store(){
 
 	}
+	public function search(Request $request){
+		if(!$request->has('search-user')){
+			return redirect()->back();
+		}
+		$q = $request->input('search-user');
+		$users= $this->homeOwner->search($q);
+		
+		return view('default.blade.index')->withUsers($users);
+	}
 }

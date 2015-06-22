@@ -23,7 +23,21 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['name', 'email', 'password'];
+	protected $fillable = [
+							'firstname',
+							'email',
+							'password',
+							'middlename',
+							'lastname',
+							'address',
+							'landline',
+							'mobile',
+							'gender',
+							'propertyaddress',
+							'birthdate',
+							'usergroup',
+							'status' 
+							];
 
 	/**
 	 * The attributes excluded from the model's JSON form.
@@ -33,3 +47,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	protected $hidden = ['password', 'remember_token'];
 
 }
+/*SELECT `COLUMN_NAME`
+FROM `INFORMATION_SCHEMA`.`COLUMNS` 
+WHERE `TABLE_SCHEMA`='kingsvilledb' 
+    AND `TABLE_NAME`='users';*/
