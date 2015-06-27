@@ -4,6 +4,10 @@ use Illuminate\Support\ServiceProvider;
 
 use KingsVilleApp\Repositories\Eloquent\EloquentHomeOwnerRepository;
 use KingsVilleApp\Repositories\Contracts\HomeOwnerContract;
+
+
+use KingsVilleApp\Repositories\Eloquent\EloquentUserRepository;
+use KingsVilleApp\Repositories\Contracts\UserContract;
 class AppServiceProvider extends ServiceProvider {
 
 	/**
@@ -33,6 +37,12 @@ class AppServiceProvider extends ServiceProvider {
 		);
 		$this->app->bind('KingsVilleApp\Repositories\Contracts\HomeOwnerContract',
 						 'KingsVilleApp\Repositories\Eloquent\EloquentHomeOwnerRepository');
+
+		$this->app->bind('KingsVilleApp\Repositories\Contracts\ContentsContract',
+						 'KingsVilleApp\Repositories\Eloquent\EloquentContentsRepository');
+
+		$this->app->bind('KingsVilleApp\Repositories\Contracts\UserContract',
+						 'KingsVilleApp\Repositories\Eloquent\EloquentUserRepository');
 	}
 
 }

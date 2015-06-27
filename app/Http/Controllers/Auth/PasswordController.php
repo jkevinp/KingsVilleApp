@@ -18,6 +18,7 @@ class PasswordController extends Controller {
 	|
 	*/
 
+
 	use ResetsPasswords;
 
 	/**
@@ -31,7 +32,6 @@ class PasswordController extends Controller {
 	{
 		$this->auth = $auth;
 		$this->passwords = $passwords;
-
 		$this->middleware('guest');
 	}
 

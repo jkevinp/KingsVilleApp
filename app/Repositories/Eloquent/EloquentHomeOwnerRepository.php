@@ -1,15 +1,15 @@
 <?php namespace KingsVilleApp\Repositories\Eloquent;
 use KingsVilleApp\Repositories\Contracts\HomeOwnerContract;
-use KingsVilleApp\User;
+use KingsVilleApp\HomeOwner;
 class EloquentHomeOwnerRepository implements HomeOwnerContract{
 	public function find($id){
-		return User::find($id);
+		return HomeOwner::find($id);
 	}
 	public function all(){
-		return User::all();
+		return HomeOwner::all();
 	}
 	public function count(){
-		return User::all()->count();
+		return HomeOwner::all()->count();
 	}
 	public function store($param){
 
@@ -18,6 +18,6 @@ class EloquentHomeOwnerRepository implements HomeOwnerContract{
 
 	}
 	public function search($query){
-		return User::where('firstname', 'like', '%'.$query.'%')->get();
+		return HomeOwner::where('firstname', 'like', '%'.$query.'%')->get();
 	}
 }

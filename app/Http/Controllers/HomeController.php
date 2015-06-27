@@ -1,6 +1,7 @@
 <?php namespace KingsVilleApp\Http\Controllers;
 
 use KingsVilleApp\User;
+use KingsVilleApp\Repositories\Contracts\ContentsContract;
 
 class HomeController extends Controller {
 
@@ -20,9 +21,9 @@ class HomeController extends Controller {
 	 *
 	 * @return void
 	 */
-	public function __construct()
-	{
-		//$this->middleware('auth');
+	public function __construct(ContentsContract $cc){
+		$this->contentsContract = $cc;
+		$this->middleware('guest');
 	}
 
 	/**
@@ -30,10 +31,12 @@ class HomeController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index()
-	{
-		$users = User::all();
-		return view('home')->withUsers($users);
+	public function index(){
+		$contents = $this->contentsContract->all();
+		return view('user.blade.home')->withContents($contents);
+	}
+	public function login(){
+		return view('auth.login');
 	}
 
 }
