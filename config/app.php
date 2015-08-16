@@ -195,7 +195,6 @@ return [
 		'View'      => 'Illuminate\Support\Facades\View',
 		'Form' 		=> 'Collective\Html\FormFacade', /* FORM */
       	'Html'		=> 'Collective\Html\HtmlFacade', /*BUILDER */
-
 	],
 
 ];

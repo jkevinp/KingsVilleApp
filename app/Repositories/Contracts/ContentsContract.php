@@ -7,4 +7,5 @@ interface ContentsContract{
 		public function store($param);
 		public function edit($id, $param);
 		public function search($query);
+		public function getForm();
 }

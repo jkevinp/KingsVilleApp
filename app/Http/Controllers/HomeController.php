@@ -23,9 +23,7 @@ class HomeController extends Controller {
 	 */
 	public function __construct(ContentsContract $cc){
 		$this->contentsContract = $cc;
-		$this->middleware('guest');
 	}
-
 	/**
 	 * Show the application dashboard to the user.
 	 *
@@ -33,10 +31,6 @@ class HomeController extends Controller {
 	 */
 	public function index(){
 		$contents = $this->contentsContract->all();
-		return view('user.blade.home')->withContents($contents);
+		return view('guest.blade.home')->withContents($contents);
 	}
-	public function login(){
-		return view('auth.login');
-	}
-
 }

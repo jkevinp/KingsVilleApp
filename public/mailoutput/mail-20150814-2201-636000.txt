@@ -1,0 +1,174 @@
+To: Sambertttt <sambert888@gmail.com>
+Subject: Activation Needed!
+Message-ID: <08cd892e6ceb86e699527ee37a035a01@localhost>
+Date: Fri, 14 Aug 2015 22:01:40 +0000
+From: KingsVilleApp <no-reply@sunrockresorts.com>
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+<html>
+<head>
+   <meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8"=
+>
+   <title>KingsVille HomeOwners Association</title>
+   <style type=3D"text/css">
+   =09a {color: #4A72AF;}
+=09body, #header h1, #header h2, p {margin: 0; padding: 0;}
+=09#main {border: 1px solid #cfcece;}
+=09img {display: block;}
+=09#top-message p, #bottom-message p {color: #3f4042; font-size: 12px; font=
+-family: Arial, Helvetica, sans-serif; }
+=09#header h1 {color: #ffffff !important; font-family: "Lucida Grande", "Lu=
+cida Sans", "Lucida Sans Unicode", sans-serif; font-size: 24px; margin-bott=
+om: 0!important; padding-bottom: 0; }
+=09#header h2 {color: #ffffff !important; font-family: Arial, Helvetica, sa=
+ns-serif; font-size: 24px; margin-bottom: 0 !important; padding-bottom: 0; =
+}
+=09#header p {color: #ffffff !important; font-family: "Lucida Grande", "Luc=
+ida Sans", "Lucida Sans Unicode", sans-serif; font-size: 12px;  }
+=09h1, h2, h3, h4, h5, h6 {margin: 0 0 0.8em 0;}
+=09h3 {font-size: 28px; color: #444444 !important; font-family: Arial, Helv=
+etica, sans-serif; }
+=09h4 {font-size: 22px; color: #4A72AF !important; font-family: Arial, Helv=
+etica, sans-serif; }
+=09h5 {font-size: 18px; color: #444444 !important; font-family: Arial, Helv=
+etica, sans-serif; }
+=09p {font-size: 12px; color: #444444 !important; font-family: "Lucida Gran=
+de", "Lucida Sans", "Lucida Sans Unicode", sans-serif; line-height: 1.5;}
+   </style>
+</head>
+
+
+
+<body>
+
+
+<table width=3D"100%" cellpadding=3D"0" cellspacing=3D"0" bgcolor=3D"#79589=
+F"><tr><td>
+
+<table id=3D"main" width=3D"600" align=3D"center" cellpadding=3D"0" cellspa=
+cing=3D"15" bgcolor=3D"#e4e4e4">
+=09=09<tr>
+=09=09=09<td>
+=09=09=09=09<table id=3D"header" cellpadding=3D"10" cellspacing=3D"0" align=
+=3D"center" bgcolor=3D"8fb3e9">
+=09=09=09=09=09<tr>
+=09=09=09=09=09=09<td width=3D"570" bgcolor=3D"7aa7e9"><h1>KingsVille Homeo=
+wner's Association</h1></td>
+=09=09=09=09=09</tr>
+=09=09=09=09=09<tr>
+=09=09=09=09=09=09<td width=3D"570" bgcolor=3D"8fb3e9" style=3D"background:=
+#79589F;"><h2 style=3D"color:#ffffff!important">Reminder</h2></td>
+=09=09=09=09=09</tr>
+=09=09=09=09=09<tr>
+=09=09=09=09=09=09<td width=3D"570" align=3D"right" bgcolor=3D"7aa7e9"><p>2=
+015-08-14</p></td>
+=09=09=09=09=09</tr>
+=09=09=09=09</table><!-- header -->
+=09=09=09</td>
+=09=09</tr><!-- header -->
+
+=09=09<tr>
+=09=09=09<td></td>
+=09=09</tr>
+=09=09<tr>
+=09=09=09<td>
+=09=09=09=09<table id=3D"content-1" cellpadding=3D"0" cellspacing=3D"0" ali=
+gn=3D"center">
+=09=09=09=09=09<tr>
+=09=09=09=09=09=09<td width=3D"170" valign=3D"top">
+=09=09=09=09=09=09=09<table cellpadding=3D"5" cellspacing=3D"0">
+=09=09=09=09=09=09=09=09<tr><td bgcolor=3D"d0d0d0"><img src=3D"" width=3D"1=
+70" /></td></tr></table>
+=09=09=09=09=09=09</td>
+=09=09=09=09=09=09<td width=3D"15"></td>
+=09=09=09=09=09=09<td width=3D"375" valign=3D"top" colspan=3D"3">
+=09=09=09=09=09=09=09<h3>Account Notice</h3>
+=09=09=09=09=09=09</td>
+=09=09=09=09=09</tr>
+=09=09=09=09</table><!-- content 1 -->
+=09=09=09</td>
+=09=09</tr><!-- content 1 -->
+=09=09<tr>
+=09=09=09<td>
+=09=09=09=09<table id=3D"content-2" cellpadding=3D"0" cellspacing=3D"0" ali=
+gn=3D"center">
+=09=09=09=09=09<tr>
+=09=09=09=09=09=09<td width=3D"570">
+=09=09=09=09=09=09<p>
+=09=09=09=09=09=09=09We have generated an account for you to monitor your r=
+eservations and payments.<br/>
+=09=09=09=09=09=09=09<b>Login Id</b>: sambert888@gmail.com <br/>
+=09=09=09=09=09=09=09To Activate your account automatically, please click t=
+he Link below<br/>
+=09=09=09=09=09=09=09&lt;a href=3D&quot;http://localhost:8000/user/account/=
+verify/68bb04bd54b8f6c530695e0b77de298276a0511d&quot;&gt;Activate Now!&lt;/=
+a&gt;<br/>
+=09=09=09=09=09=09</p></td>
+=09=09=09=09=09</tr>
+=09=09=09=09</table><!-- content-2 -->
+=09=09=09</td>
+=09=09</tr><!-- content-2 -->
+=09=09<tr>
+=09=09=09<td height=3D"30"><img src=3D"http://dummyimage.com/570x30/fff/fff=
+" /></td>
+=09=09</tr>
+=09=09<tr>
+=09=09=09<td>
+=09=09=09=09<table id=3D"content-3" cellpadding=3D"0" cellspacing=3D"0" ali=
+gn=3D"center">
+=09=09=09=09=09<tr>
+=09=09=09=09=09=09<td width=3D"170" valign=3D"top" bgcolor=3D"d0d0d0" style=
+=3D"padding:5px;">
+=09=09=09=09=09=09=09<img src=3D"" width=3D"170" />
+=09=09=09=09=09=09</td>
+=09=09=09=09=09=09<td width=3D"15"></td>
+=09=09=09=09=09=09<td width=3D"170" valign=3D"top" bgcolor=3D"d0d0d0" style=
+=3D"padding:5px;">
+=09=09=09=09=09=09=09<img src=3D"" />
+=09=09=09=09=09=09</td>
+=09=09=09=09=09=09<td width=3D"15"></td>
+=09=09=09=09=09=09<td width=3D"170" valign=3D"top" bgcolor=3D"d0d0d0" style=
+=3D"padding:5px;">
+=09=09=09=09=09=09=09<img src=3D"" />
+=09=09=09=09=09=09</td>
+=09=09=09=09=09</tr>
+=09=09=09=09</table><!-- content-3 -->
+=09=09=09</td>
+=09=09</tr><!-- content-3 -->
+=09=09
+=09=09<tr>
+=09=09=09<td height=3D"30"><img src=3D"" /></td>
+=09=09</tr>
+=09=09<tr>
+=09=09=09<td>
+=09=09=09=09<table id=3D"content-6" cellpadding=3D"0" cellspacing=3D"0" ali=
+gn=3D"center">
+=09=09=09=09=09<p align=3D"center">Lorem ipsum dolor sit amet, consectetur =
+adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magn=
+a aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco labori=
+s nisi ut aliquip ex ea commodo consequat. </p>
+=09=09=09=09=09<p align=3D"center"><a href=3D"#">CALL TO ACTION</a></p>
+=09=09=09=09</table>
+=09=09=09</td>
+=09=09</tr>
+
+=09</table><!-- main -->
+=09<table id=3D"bottom-message" cellpadding=3D"20" cellspacing=3D"0" width=
+=3D"600" align=3D"center">
+=09=09<tr>
+=09=09=09<td align=3D"center">
+=09=09=09=09<p>You are receiving this email because you signed up for updat=
+es</p>
+=09=09=09=09<p><a href=3D"#">Unsubscribe instantly</a> | <a href=3D"#">Forw=
+ard to a friend</a> | <a href=3D"#">View in Browser</a></p>
+=09=09=09</td>
+=09=09</tr>
+=09</table><!-- top message -->
+</td></tr></table><!-- wrapper -->
+
+
+
+</body>
+</html>

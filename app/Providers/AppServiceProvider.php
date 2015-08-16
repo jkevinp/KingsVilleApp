@@ -8,6 +8,18 @@ use KingsVilleApp\Repositories\Contracts\HomeOwnerContract;
 
 use KingsVilleApp\Repositories\Eloquent\EloquentUserRepository;
 use KingsVilleApp\Repositories\Contracts\UserContract;
+
+use KingsVilleApp\Repositories\Eloquent\EloquentMailRepository;
+use KingsVilleApp\Repositories\Contracts\MailContract;
+
+use KingsVilleApp\Repositories\Eloquent\EloquentReservationRepository;
+use KingsVilleApp\Repositories\Contracts\ReservationContract;
+
+
+use KingsVilleApp\Repositories\Eloquent\EloquentReservableRepository;
+use KingsVilleApp\Repositories\Contracts\ReservableContract;
+
+
 class AppServiceProvider extends ServiceProvider {
 
 	/**
@@ -35,14 +47,27 @@ class AppServiceProvider extends ServiceProvider {
 			'Illuminate\Contracts\Auth\Registrar',
 			'KingsVilleApp\Services\Registrar'
 		);
-		$this->app->bind('KingsVilleApp\Repositories\Contracts\HomeOwnerContract',
-						 'KingsVilleApp\Repositories\Eloquent\EloquentHomeOwnerRepository');
-
+	
 		$this->app->bind('KingsVilleApp\Repositories\Contracts\ContentsContract',
 						 'KingsVilleApp\Repositories\Eloquent\EloquentContentsRepository');
 
 		$this->app->bind('KingsVilleApp\Repositories\Contracts\UserContract',
 						 'KingsVilleApp\Repositories\Eloquent\EloquentUserRepository');
+		
+		$this->app->bind('KingsVilleApp\Repositories\Contracts\TransactionContract',
+						 'KingsVilleApp\Repositories\Eloquent\EloquentTransactionRepository');
+
+		$this->app->bind('KingsVilleApp\Repositories\Contracts\MailContract',
+						 'KingsVilleApp\Repositories\Eloquent\EloquentMailRepository');
+
+		$this->app->bind('KingsVilleApp\Repositories\Contracts\FeeContract',
+						 'KingsVilleApp\Repositories\Eloquent\EloquentFeeRepository');
+
+		$this->app->bind('KingsVilleApp\Repositories\Contracts\ReservationContract',
+						 'KingsVilleApp\Repositories\Eloquent\EloquentReservationRepository');
+
+		$this->app->bind('KingsVilleApp\Repositories\Contracts\ReservableContract',
+						 'KingsVilleApp\Repositories\Eloquent\EloquentReservableRepository');
 	}
 
 }

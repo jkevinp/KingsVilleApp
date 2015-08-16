@@ -13,7 +13,12 @@ class EventServiceProvider extends ServiceProvider {
 	protected $listen = [
 		'event.name' => [
 			'EventListener',
+
 		],
+		'KingsVilleApp\Events\AccountEvents' =>
+		[
+			'KingsVilleApp\Handlers\Events\AccountEventsHandler'
+		]
 	];
 
 	/**

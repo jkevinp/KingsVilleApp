@@ -16,7 +16,7 @@ class CreateContentsTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('title');
-			$table->string('content');
+			$table->string('content' , 10000);
 			$table->string('userid');
 			$table->timestamps();
 		});

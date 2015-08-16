@@ -7,6 +7,7 @@ use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
+
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
 
 	use Authenticatable, CanResetPassword;
@@ -17,6 +18,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 * @var string
 	 */
 	protected $table = 'users';
+
 
 	/**
 	 * The attributes that are mass assignable.
@@ -36,7 +38,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 							'propertyaddress',
 							'birthdate',
 							'usergroup',
-							'status' 
+							'status' ,
+							'linktoken'
 							];
 
 	/**
@@ -45,6 +48,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 * @var array
 	 */
 	protected $hidden = ['password', 'remember_token'];
+	public function transactions()
+	{
+		return $this->hasMany('KingsVilleApp\Transaction' , 'account_id');
+	}
 
 }
 /*SELECT `COLUMN_NAME`

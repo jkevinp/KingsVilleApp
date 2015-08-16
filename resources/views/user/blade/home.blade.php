@@ -1,32 +1,28 @@
 @extends('user.layout.layout')
 
 @section('content')
-	  <div class="row">
-               <h5><i class="mdi-action-account-circle"></i> KingsVille Hills Homeowners Association</h5>
-        </div>
-        
-        <div class="row center-align card">
-           <div class="col s12 success-info">
-               <h5><i class="mdi-navigation-check"></i>
-               	@if($contents == null)
-               		You've reached KingsVille Homeowners Association. No contents submitted, please add new post.
-               	@else
-               		@foreach($contents as $c)
-               			{{$c->title}} <span class="badge"> Posted: {{$c->created_at}}</span>
-               			</h5>
-               			<hr/>
-               			<br/>
-               			{{$c->content}}
-               			<br/>
-               			 <span class="badge"> Posted by: {{$c->userid}}</span>
-               			 <br/><br/>
+<div class="row mt">
+<div class=" col-md-10 col-md-offset-1">
+<div class="showback">
 
-               		@endforeach
-               	@endif
-             
-           </div>
-            
-        </div>
-		
-	
+@if($contents->count() == 0)
+<h4 class="violet">You've reached KingsVille Homeowners Association. No contents submitted, please add new post. </h4>
+
+@else
+@foreach($contents as $c)
+<h4 class="violet">{{$c->title}}<span class="badge bg-primary"> Posted: {{$c->created_at}}</span> </h4>
+
+<hr/>
+<br/>
+{{$c->content}}
+<br/>
+<span class="badge bg-primary"> Posted by: {{$c->userid}}</span>
+<br/><br/>
+
+@endforeach
+@endif
+
+</div>
+</div>
+</div>
 @stop
