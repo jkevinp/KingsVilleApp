@@ -37,8 +37,15 @@ class EloquentUserRepository implements UserContract{
 	public function edit($id, $param){
 
 	}
-	public function findBy($field, $param){
-		return User::where($field, '=' , $param)->get()->first();
+	public function findBy($field, $param , $operator = false){
+		if(!$operator) $operator = '=';
+		return User::where($field, $operator , $param)->first();
+	}
+
+	
+	public function findAllBy($field, $param , $operator = false){
+		if(!$operator) $operator = '=';
+		return User::where($field, $operator , $param);
 	}
 	public function search($query){
 		return User::where('firstname', 'like', '%'.$query.'%')->get();

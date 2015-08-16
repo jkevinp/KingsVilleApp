@@ -64,7 +64,7 @@
                       </a>
                       <ul class="sub">
                         <li> <a  href="{{route('User.transaction.list')}}">Transaction List</a></li>
-                        <li> <a  href="#">Monthly Water Bill</a></li>
+                        <li> <a  href="{{route('User.transaction.billing.water')}}">Monthly Water Bill</a></li>
                         <li> <a  href="#">Annual Miscellaneous</a></li>
                       </ul>
                   </li>

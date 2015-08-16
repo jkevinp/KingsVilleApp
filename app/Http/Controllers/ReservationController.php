@@ -6,6 +6,8 @@ use KingsVilleApp\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use KingsVilleApp\Repositories\Contracts\ReservationContract;
 
+use KingsVilleApp\Repositories\Contracts\ReservableContract;
+
 class ReservationController extends Controller {
 
 	/**
@@ -13,9 +15,10 @@ class ReservationController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function __construct(ReservationContract $rc)
+	public function __construct(ReservationContract $rc , ReservableContract $rcc)
 	{
 		$this->reservation = $rc;
+		$this->reservable = $rcc;
 	}
 
 	public function index()
@@ -30,11 +33,14 @@ class ReservationController extends Controller {
 	 */
 	public function create()
 	{
-		$form = $this->reservation->getForm();
+		/*$form = $this->reservation->getForm();
 		return view('self.blade.empty.form')
 				->withForm($form)
 				->with('formTitle','Create new Reservable')
 				->withRoute(route('User.reservation.store'));
+				*/
+		$this->reservable->all();
+
 	}
 
 	/**

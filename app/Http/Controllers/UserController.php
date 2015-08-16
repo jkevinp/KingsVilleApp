@@ -97,6 +97,14 @@ class UserController extends Controller {
 		$users= $this->user->search($q);
 		return view('user.blade.accounts.show')->withUsers($users);
 	}
+	public function ajaxSearch(Request $request){
+		if($request->ajax()){
+			$q = $request->input('param');
+			$users= $this->user->findBy('id' , '%'.$q.'%' , 'Like');
+			return $users;
+		}
+		
+	}
 	public function logout(){
 		Auth::logout();
 		return redirect(route('Guest.home'));

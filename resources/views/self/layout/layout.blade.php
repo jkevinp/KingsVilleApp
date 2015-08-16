@@ -132,11 +132,12 @@
     </script>
     @endif
 
+      @yield('script')
      <script>
        $(document).ready(function () {
            $('select.styled').customSelect();
         });
     </script>
-    @yield('script')
+  
   </body>
 </html>

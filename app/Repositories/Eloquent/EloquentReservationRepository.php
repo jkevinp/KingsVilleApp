@@ -1,7 +1,7 @@
 <?php namespace KingsVilleApp\Repositories\Eloquent;
 use KingsVilleApp\Repositories\Contracts\ReservationContract;
 
-class EloquentReservationRepository{
+class EloquentReservationRepository implements ReservationContract{
 	public function find($id){
 		
 	}
@@ -28,14 +28,6 @@ class EloquentReservationRepository{
 	}
 
 	public function getFillable(){
-		$model = (new Reservable);
-		$fields =  $model->form;
-		dd($fields);
-		$showableFields = [];
-		foreach ($fields as $key => $value) {
-			if(!in_array($value , $model->hidefields))
-				array_push($showableFields, $value);
-		}
-		return $showableFields;
+		
 	}
 }

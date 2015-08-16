@@ -3,7 +3,8 @@
 use KingsVilleApp\User;
 use Auth;
 use KingsVilleApp\Repositories\Contracts\TransactionContract;
-
+use KingsVilleApp\Repositories\Contracts\UserContract;
+use DB;
 class TransactionController extends Controller {
 
 	/*
@@ -22,9 +23,10 @@ class TransactionController extends Controller {
 	 *
 	 * @return void
 	 */
-	public function __construct(TransactionContract $tc){
+	public function __construct(TransactionContract $tc , UserContract $uc){
 		$this->middleware('authenticate');
 		$this->transactionContract = $tc;
+		$this->user = $uc;
 	}
 	/**
 	 * Show the application dashboard to the user.
@@ -45,5 +47,10 @@ class TransactionController extends Controller {
 	}
 	public function login(){
 		return view('auth.login');
+	}
+	public function waterBilling(){
+		$users = $this->user->findAllBy('usergroup' , 'homeowner')->get();
+		
+		return view('self.blade.transaction.waterbilling')->with('users', $users);
 	}
 }

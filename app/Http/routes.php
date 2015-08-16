@@ -33,6 +33,7 @@ Route::group(['prefix' => 'user'] , function(){
 		Route::post('/update' , ['uses' => 'UserController@update'  , 'as' => 'User.account.update']);
 		Route::post('/update-info/' , ['uses' => 'UserController@password'  , 'as' => 'User.account.password']);
 
+		Route::get('/ajaxSearch/', ['uses' => 'UserController@ajaxSearch' , 'as' => 'User.account.livesearch']);
 		Route::get('/search/', ['uses' => 'UserController@search' , 'as' => 'User.account.search']);
 		Route::get('/edit/{id}/', ['uses' => 'UserController@edit' , 'as' => 'User.account.edit']);
 		Route::get('/create/success', ['uses' => 'UserController@store' , 'as' => 'User.account.create.success']);
@@ -67,6 +68,10 @@ Route::group(['prefix' => 'user'] , function(){
 	Route::group(['prefix' => 'transaction'] , function(){
 		Route::get('/list/' ,  ['uses' => 'TransactionController@show' , 'as' => 'User.transaction.list']);
 		Route::get('/ledger/' ,  ['uses' => 'TransactionController@ledger' , 'as' => 'User.transaction.ledger']);
+
+		Route::group(['prefix' => 'billing'] , function(){
+			Route::get('/water/'  ,	['uses'=> 'TransactionController@waterBilling' , 'as' =>'User.transaction.billing.water']);
+		});
 	});
 
 	Route::group(['prefix' => 'reservable'] , function(){
@@ -118,7 +123,6 @@ Route::group(['prefix' => 'homeowner'] , function(){
 	});
 
 	Route::group(['prefix' => 'reservation'] , function(){
-		Route::get('/list/' , ['uses' => 'UserController@show' , 'as' => 'HomeOwner.reservation.list']);
-		Route::get('/create/',['uses' => 'UserController@create' , 'as' => 'HomeOwner.reservation.create']);
+		Route::get('/create/',['uses' => 'ReservationController@create' , 'as' => 'HomeOwner.reservation.create']);
 	});
 });
