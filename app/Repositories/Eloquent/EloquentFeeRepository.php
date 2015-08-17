@@ -1,7 +1,7 @@
 <?php namespace KingsVilleApp\Repositories\Eloquent;
 use KingsVilleApp\Repositories\Contracts\FeeContract;
 use KingsVilleApp\Fee;
-
+use KingsVilleApp\Helpers\cHelpers as c;
 class EloquentFeeRepository implements FeeContract{
 	public function find($id){
 		return Fee::find($id);
@@ -13,7 +13,7 @@ class EloquentFeeRepository implements FeeContract{
 		return Fee::all()->count();
 	}
 	public function store($param){
-		$param['id'] = 'Fee'.$param['name'].date('Y-m-d');
+		$param['id'] = c::GenerateId('fee'.$param['type'] , $param['name']);
 		$param['status']= 'active';
 		return Fee::create($param);
 	}

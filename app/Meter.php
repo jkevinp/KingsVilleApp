@@ -3,15 +3,23 @@
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Reservable extends Model {
+class Meter extends Model {
 use SoftDeletes;
-	protected $table = 'reservable';
-	protected $fillable = ['id', 'name' ,'flatrate' ,'status'];
+	protected $table = 'meter';
+	protected $fillable = [
+							'id',
+							'user_id',
+							'readingunit',
+							'status',
+							'details',
+							];
+
+
+
 	public $hidefields =  [];
 	public $form =  [
-						'name' => ['type' => 'text'],
-						'description' => ['type' => 'textarea'],
-						'flatrate' => ['type' => 'number'],
+						'readingunit' => ['type' => 'select' , 'values' => ['cubicmeter' => 'Cubic Meter(m^3)' , 'cubicfeet' => 'Cubic Feet(ft.^3)']],
+						'details' => ['type' => 'textarea'],
 						'status' => ['type' => 'select' , 'values' => ['active' => 'active' , 'inactive'=>'inactive']]
 					];
 	
@@ -21,7 +29,7 @@ use SoftDeletes;
      *
      * @var array
      */
-    protected $dates = ['deleted_at'];
+    protected $dates = ['deleted_at' , 'created_at' , 'updated_at'];
 	public function getForm(){
 		return Helpers\cHelpers::MakeForm($this->form);
 	}

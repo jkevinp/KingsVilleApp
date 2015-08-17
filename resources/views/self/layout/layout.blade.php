@@ -22,6 +22,7 @@
     <link rel="shortcut icon" href="{{ asset($env) }}/img/icons/favicon.ico">
     <!-- Bootstrap core CSS -->
     <link href="{{URL::asset($env)}}/css/bootstrap.css" rel="stylesheet">
+     <link href="{{URL::asset($env)}}/css/selectize.css" rel="stylesheet">
     <!--external css-->
     <link href="{{URL::asset($env)}}/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="{{URL::asset($env)}}/js/gritter/css/jquery.gritter.css" />   
@@ -69,10 +70,8 @@
       </footer>
       <!--footer end-->
     </section>
-    <!-- footer js -->
-        <script type="text/javascript" src="{{URL::asset($env)}}/js/jquery.js"></script>
-     <script src="{{URL::asset($env)}}/js/jquery.js"></script>
-   
+    <!-- footer js <script src="{{URL::asset($env)}}/js/jquery.js"></script>-->
+    <script type="text/javascript" src="{{URL::asset($env)}}/js/jquery.js"></script>
     <script type="text/javascript" src="{{URL::asset($env)}}/js/bootstrap.min.js"></script>
     <script class="include" type="text/javascript" src="{{URL::asset($env)}}/js/jquery.dcjqaccordion.2.7.js"></script>
     <script type="text/javascript" src="{{URL::asset($env)}}/js/jquery.scrollTo.min.js"></script>
@@ -89,6 +88,7 @@
     <script type="text/javascript" src="{{URL::asset($env)}}/js/bootstrap-switch.js"></script>
     
     <!--custom tagsinput-->
+    <script type="text/javascript" src="{{URL::asset($env)}}/js/selectize.min.js"></script>
     <script type="text/javascript" src="{{URL::asset($env)}}/js/jquery.tagsinput.js"></script>
     <script src="{{URL::asset($env)}}/js/lightbox.min.js"></script>
     

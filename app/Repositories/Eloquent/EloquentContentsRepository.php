@@ -2,6 +2,7 @@
 use KingsVilleApp\Repositories\Contracts\ContentsContract;
 use KingsVilleApp\Contents;
 use Auth;
+use KingsVilleApp\Helpers\cHelpers as c;
 class EloquentContentsRepository implements ContentsContract{
 	public function find($id){
 		return Contents::find($id);
@@ -13,7 +14,7 @@ class EloquentContentsRepository implements ContentsContract{
 		return Contents::all()->count();
 	}
 	public function store($param){
-		$param['id'] = 'Ann'. substr($param['title'], 0, 1).date('YmdHis');
+		$param['id'] = c::GenerateId('Ann' , str_random(3));
 		return Contents::create($param);
 	}
 	public function edit($id, $param){

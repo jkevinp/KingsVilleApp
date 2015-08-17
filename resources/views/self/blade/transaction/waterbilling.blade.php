@@ -1,6 +1,12 @@
 @extends('self.layout.layout')
 
 @section('content')
+
+ <div class="position:absolute; top:-50px; left:0px;">
+                <input type="text" id="search" class="form-control" style="">
+                <div class="output" style="position:relative; overflow:visible; " id="output" >
+                </div>
+                </div>
 <div class="row mt">
     <div class="col-lg-6">
         <div class="form-panel">
@@ -19,9 +25,7 @@
         <div class="form-panel">
            <h4><i class="fa fa-user-add"></i> Bill To</h4>
             <div class=" form">
-                <input type="text" id="search" class="form-control">
-                <div class="output" style="" id="output">
-                </div>
+               
                 @if(count($users) > 0)
                 <select class="form-control">
                     @foreach($users as $user)
@@ -44,6 +48,8 @@
 
 @stop
 
+
+
 @section('script')
 <script type="text/javascript">
 $( document ).ready(function() {
@@ -60,15 +66,21 @@ $( document ).ready(function() {
     });
     $('#search').on('keyup', function(){
        var outputDiv = $('.output');
-       var output = "";
+    
        $.get(window.location.protocol + "//" + window.location.host + "/user/account/ajaxSearch",  { param: $('#search').val()}, function( data ) {
         outputDiv.html('');
       
                 var cname = data.id + "- " + data.firstname + data.middlename + data.lastname ;
-                output += '<div class="">';
+                output += '<div class=" " style="">';
                 output += '<a href="" class="btn btn-theme btn-block">' + cname + '</a>';
                 output += '</div>';
-
+                 output += '<div class=" " style="">';
+                output += '<a href="" class="btn btn-theme btn-block">' + cname + '</a>';
+                output += '</div>';
+                 output += '<div class=" " style="">';
+                output += '<a href="" class="btn btn-theme btn-block">' + cname + '</a>';
+                output += '</div>';
+           
     
          outputDiv.html(output);
         });

@@ -3,10 +3,20 @@
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Reservable extends Model {
+class MeterReading extends Model {
 use SoftDeletes;
-	protected $table = 'reservable';
-	protected $fillable = ['id', 'name' ,'flatrate' ,'status'];
+	protected $table = 'meterreadings';
+	protected $fillable = [
+							'id',
+							'meter_id',
+							'lastreading',
+							'currentreading',
+							'readingdate',
+							'details',
+							'deleted_at',
+							'created_at',
+							'updated_at'
+							];
 	public $hidefields =  [];
 	public $form =  [
 						'name' => ['type' => 'text'],

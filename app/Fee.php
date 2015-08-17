@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 class Fee extends Model  {
 
-
+use SoftDeletes;
 	/**
 	 * The database table used by the model.
 	 *
@@ -19,12 +19,13 @@ class Fee extends Model  {
 	 *
 	 * @var array
 	 */
+	protected $dates = ['deleted_at' , 'created_at' , 'updated_at'];
 	protected $fillable = ['id', 'name' ,'type' ,'transactiontype' ,'status', 'rate'];
 	public $hidefields = ['id' , 'status'];
 	public $form =  [
 						'name' => ['type'=>'text'],
-						'type' => ['type' => 'select' , 'values' => ['water' => 'water' , 'anal' => 'anal']],
-						'transactiontype' => [
+						'transactiontype' => ['type' => 'select' , 'values' => ['water' => 'water' , 'anal' => 'anal']],
+						'type' => [
 												'type'=>'select' , 
 												'values' => ['fixed' => 'By Fixed value' ,'percentage'=>'By Percentage']
 

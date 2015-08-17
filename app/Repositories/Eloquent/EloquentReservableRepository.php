@@ -1,7 +1,7 @@
 <?php namespace KingsVilleApp\Repositories\Eloquent;
 use KingsVilleApp\Repositories\Contracts\ReservableContract;
 use KingsVilleApp\Reservable;
-
+use KingsVilleApp\Helpers\cHelpers as c;
 class EloquentReservableRepository  implements ReservableContract{
 	public function find($id){
 		return Reservable::find($id);
@@ -13,7 +13,7 @@ class EloquentReservableRepository  implements ReservableContract{
 		return Reservable::all()->count();
 	}
 	public function store($param){
-		$param['id'] = 'Resprop'.$param['name'].date('Y-m-d');
+		$param['id'] =  c::GenerateId('Resprop' , str_random(3));
 		$param['status']= 'active';
 		return Reservable::create($param);
 	}
@@ -39,11 +39,9 @@ class EloquentReservableRepository  implements ReservableContract{
 	public function getForm(){
 		return (new Reservable)->getForm();
 	}
-
 	public function getFillable(){
 		$model = (new Reservable);
 		$fields =  $model->form;
-		dd($fields);
 		$showableFields = [];
 		foreach ($fields as $key => $value) {
 			if(!in_array($value , $model->hidefields))

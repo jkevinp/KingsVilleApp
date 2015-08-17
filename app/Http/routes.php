@@ -18,7 +18,8 @@ Route::get('/t', function(){
    dd(Auth::user());
 });
 
-
+// cubic feet (ft.3) or US gallons
+// cubic metres (m3) or litres
 Route::group(['prefix' => 'user'] , function(){
 
 	Route::get('/index/', 'UserController@index');
@@ -41,6 +42,7 @@ Route::group(['prefix' => 'user'] , function(){
 		Route::get('/forgotpassword/' , ['uses' => 'UserController@forgotPassword', 'as' => 'User.account.forgotpassword']);
 		Route::post('/sendpassword/' , ['uses' => 'UserController@sendPassword', 'as' => 'User.account.sendpassword']);
 		Route::get('/changeStatus/{id}' , ['uses' => 'UserController@changeStatus' , 'as' => 'User.account.changestatus']);
+		Route::get('/profile/{id}' , ['uses' => 'UserController@profile' , 'as' => 'User.account.profile']);
 	});
 
 	Route::group(['prefix' => 'fee'] , function(){
@@ -51,7 +53,16 @@ Route::group(['prefix' => 'user'] , function(){
 		Route::get('/changeStatus/{id}' , ['uses' => 'FeeController@changeStatus' , 'as' => 'User.fee.changestatus']);
 		Route::get('/edit/{id}' , ['uses' => 'FeeController@edit' , 'as' => 'User.fee.edit']);
 	});
-
+	Route::group(['prefix' => 'meter'] , function(){
+		Route::get('/create/' ,['uses' => 'MeterController@createMeter' , 'as' => 'User.meter.create']);
+		Route::post('/store/' , ['uses' => 'MeterController@storeMeter' , 'as' => 'User.meter.store']);
+		Route::get('/list/' , ['uses' => 'MeterController@listMeter' , 'as' => 'User.meter.list']);
+	});
+	Route::group(['prefix' => 'meter-reading'] , function(){
+		Route::get('/create/' , ['uses' => 'MeterController@createMeterReading' , 'as' => 'User.meter.reading.create']);
+		Route::post('/store/' , ['uses' => 'MeterController@storeMeterReading' , 'as' => 'User.meter.reading.store']);
+		Route::get('/list/' , ['uses' => 'MeterController@listMeterReading' , 'as' => 'User.meter.reading.list']);
+	});
 	Route::group(['prefix' => 'content'] , function(){
 		Route::get('/create/' , ['uses' => 'ContentsController@create' , 'as' => 'User.content.create']);
 		Route::post('/save/' ,  ['uses' => 'ContentsController@store' , 'as' => 'User.content.store']);

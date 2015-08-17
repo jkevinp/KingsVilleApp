@@ -2,7 +2,7 @@
 use KingsVilleApp\Repositories\Contracts\UserContract;
 use KingsVilleApp\Repositories\Contracts\MailContract;
 use KingsVilleApp\User;
-
+use KingsVilleApp\Helpers\cHelpers as c;
 class EloquentUserRepository implements UserContract{
 	public function find($id){
 		return User::find($id);
@@ -17,6 +17,7 @@ class EloquentUserRepository implements UserContract{
 		$user = User::where('email' ,'=' ,$param['email'])->get()->count();
 		if($user != 0)return false;
 		else {
+			$param['id'] = c::GenerateId('user' , str_random(3));
 			$param['linktoken'] =  sha1(date('Y-m-dH:i:s'));
 			$param['status'] = 'inactive'; 
 			$newUser = User::create($param);
@@ -36,6 +37,9 @@ class EloquentUserRepository implements UserContract{
 	}
 	public function edit($id, $param){
 
+	}
+	public function getList($param){
+	
 	}
 	public function findBy($field, $param , $operator = false){
 		if(!$operator) $operator = '=';

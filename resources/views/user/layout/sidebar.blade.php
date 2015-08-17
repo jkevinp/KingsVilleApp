@@ -71,6 +71,18 @@
                   <li class="sub-menu">
                     <a href="javascript:;" >
                       <i class="fa fa-desktop"></i>
+                        <span>Water Billing & Meters</span>
+                      </a>
+                      <ul class="sub">
+                        <li> <a  href="{{route('User.meter.create')}}">Create new Meter</a></li>
+                        <li> <a  href="{{route('User.meter.list')}}">Meter Listing</a></li>
+                        <li> <a  href="{{route('User.meter.reading.create')}}">Create new Meter Reading</a></li>
+                        <li> <a  href="{{route('User.meter.reading.list')}}">Meter Reading List</a></li>
+                      </ul>
+                  </li>
+                  <li class="sub-menu">
+                    <a href="javascript:;" >
+                      <i class="fa fa-desktop"></i>
                         <span>Property</span>
                       </a>
                       <ul class="sub">

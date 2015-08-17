@@ -22,6 +22,10 @@ class UserController extends Controller {
 		$this->mailer = $mailContract;
 		$authuser = Auth::user();
 	}
+	public function profile($id){
+		$user = $this->user->find($id);
+		return view('user.blade.accounts.profile')->with('user' , $user);
+	}
 	public function indexHomeowner(){
 
 		return view('homeowner.blade.home');
@@ -101,7 +105,9 @@ class UserController extends Controller {
 		if($request->ajax()){
 			$q = $request->input('param');
 			$users= $this->user->findBy('id' , '%'.$q.'%' , 'Like');
+			if($users->count() >0 )
 			return $users;
+			return null;
 		}
 		
 	}
