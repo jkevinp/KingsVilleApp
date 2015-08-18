@@ -1,7 +1,18 @@
 <?php namespace KingsVilleApp\Helpers;	
 
 use Form;
+use Validator;
+use Session;
 class cHelpers{
+
+	public static function validate($input, $rules){
+		$v = Validator::make($input , $rules);
+		if($v->fails())
+			Session::flash('errors' ,$v->messages());
+		
+		return $v->passes();
+	}
+
 	public static function MakeForm($formArray){
 		$snip = '';
 		foreach ($formArray as $property => $value) {
@@ -16,27 +27,34 @@ class cHelpers{
 				$id = $value['id'];
 			else $id = $property;
 			if(array_key_exists('placeholder', $value))
-				$placeholder = $value['placeholder'];
-			else $placeholder = $property;
+				$placeholder = ucfirst($value['placeholder']);
+			else $placeholder = ucfirst($property);
+
+			$others = '';
+			if(array_key_exists('others', $value)){
+				foreach ($value['others'] as $key) {
+					$others.= $key;
+				}
+			}
 			
+
 			switch($value['type']){
 				case 'number':
-
-				$snip.=  Form::number($property , null,['class' => $class , 'id' => $id , 'placeholder' => $placeholder , 'required' => '']);
+					$snip.=  Form::number($property , null,[ $others => ''	, 'class' => $class , 'id' => $id , 'placeholder' => $placeholder , 'required' => '']);
+				break;
+				case 'date':
+					$snip.='<input name="'.$property.'"class="form-control input-medium default-date-picker" size="16" type="text">';
 				break;
 				case 'text':
-					$snip.=  Form::text($property , null,['class' => $class , 'id' => $id , 'placeholder' => $placeholder , 'required' => '']);
+					$snip.=  Form::text($property , null,[$others => '', 'class' => $class , 'id' => $id , 'placeholder' => $placeholder , 'required' => '']);
 				break;
 				case 'select':
-				if(!in_array('class', $value))
-					$snip.= Form::select($property, $value['values'] , null, ['class' => $class , 'id' => $id]);
-				else{
-					dd('st');
-					$snip.= Form::select($property, $value['values'] , null, ['class' => $class , 'id' => $id]);	
-				}
+				
+					$snip.= Form::select($property, $value['values'] , null, [$others => '', 'class' => $class , 'id' => $id ,''=> $others]);
+				
 				break;
 				case 'textarea':
-					$snip.=  Form::textarea($property , null,['class' => $class , 'style' => 'resize:none;' ,'id' => $id , 'placeholder' => $placeholder , 'required' => '']);
+					$snip.=  Form::textarea($property , null,[$others => '', 'class' => $class , 'style' => 'resize:none;' ,'id' => $id , 'placeholder' => $placeholder , 'required' => '']);
 				break;
 			}
 			$snip .= '</div> </div>';

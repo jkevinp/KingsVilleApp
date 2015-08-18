@@ -11,4 +11,7 @@ interface FeeContract{
 	public function changeStatus($id);
 	public function getFillable();
 	public function getForm();
+	public function trashAll();
+	public function findTrash($id);
+	public function findAllBy($field, $param);
 }

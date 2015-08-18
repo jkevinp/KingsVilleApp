@@ -7,12 +7,9 @@ use KingsVilleApp\Repositories\Contracts\MailContract;
 use KingsVilleApp\Repositories\Contracts\ContentsContract;
 use KingsVilleApp\Http\Middleware;
 use KingsVilleApp\Events\AccountEvents;
-
 use Illuminate\Http\Request;
 use Auth;
-
-
-
+use KingsVilleApp\Helpers\cHelpers as c;
 class UserController extends Controller {
 	protected $authuser;
 	function __construct(UC $userContract , MailContract $mailContract , ContentsContract $cc){
@@ -27,7 +24,6 @@ class UserController extends Controller {
 		return view('user.blade.accounts.profile')->with('user' , $user);
 	}
 	public function indexHomeowner(){
-
 		return view('homeowner.blade.home');
 	}
 	public function indexUser(){
@@ -57,9 +53,10 @@ class UserController extends Controller {
 		$users = $this->user->all();
 		return view('user.blade.accounts.list')->with('users' , $users);
 	}
-	public function edit($id){
+	public function edit($id){//validation done
 		$user = $this->user->find($id);
-		return view('user.blade.accounts.edit')->with('user' , $user);
+		if($user)return view('user.blade.accounts.edit')->with('user' , $user);
+		else return redirect(route('User.account.list'))->withErrors('User not found');
 	}
 	public function update(Request $request){
 		$input = $request->all();
@@ -83,9 +80,12 @@ class UserController extends Controller {
 	}
 	public function sendPassword(Request $request){
 		$input = $request->all();
-		$user = $this->user->findBy('email', $input['email']);
-		\Event::fire(new AccountEvents($user, 'Password Reset' , 'emails.forgotpassword'));
-		return redirect()->back()->withErrors('Please Check your Email-address');
+		if(c::validate($input , $this->user->getRules('forgot'))){
+			$user = $this->user->findBy('email', $input['email']);
+			\Event::fire(new AccountEvents($user, 'Password Reset' , 'emails.forgotpassword'));
+			return redirect()->back()->with('flash_message','Please Check your Email-address');
+		}
+		return redirect()->back();
 	}
 	public function destroy($id){
 		
@@ -109,7 +109,6 @@ class UserController extends Controller {
 			return $users;
 			return null;
 		}
-		
 	}
 	public function logout(){
 		Auth::logout();

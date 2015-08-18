@@ -1,12 +1,6 @@
 <?php
 
-use KingsVilleApp\Events\AccountEvents;
-
 Route::get('/', ['uses' => 'HomeController@index','as' => 'Guest.home']);
-
-
-
-
 Route::group(['prefix' => 'session'], function(){
 	Route::get( '/login',   ['uses' => 'AuthenticationController@login',  'as' => 'auth.login']);
 	Route::post('/login',   ['uses' => 'AuthenticationController@signin', 'as' => 'auth.signin']);
@@ -14,8 +8,11 @@ Route::group(['prefix' => 'session'], function(){
 });
     
 Route::get('/t', function(){
-
+	var_dump(Session::get('active'));
    dd(Auth::user());
+});
+Route::get('/f', function(){
+	Session::flush();
 });
 
 // cubic feet (ft.3) or US gallons
@@ -47,24 +44,40 @@ Route::group(['prefix' => 'user'] , function(){
 
 	Route::group(['prefix' => 'fee'] , function(){
 		Route::get('/list/' , ['uses' => 'FeeController@listFee' , 'as' => 'User.fee.list']);
-		Route::get('/' , ['uses' => 'FeeController@listFee' , 'as' => 'User.fee.list']);
+		Route::get('/trash/' , ['uses' => 'FeeController@listTrashedFee' , 'as' => 'User.fee.trash']);
+		Route::get('/restore/{id}' , ['uses' => 'FeeController@restore' , 'as' => 'User.fee.restore']);
 		Route::get('/create/' , ['uses' => 'FeeController@create' , 'as' => 'User.fee.create']);
 		Route::post('/save/' , ['uses' => 'FeeController@store' , 'as' => 'User.fee.store']);
 		Route::get('/changeStatus/{id}' , ['uses' => 'FeeController@changeStatus' , 'as' => 'User.fee.changestatus']);
 		Route::get('/edit/{id}' , ['uses' => 'FeeController@edit' , 'as' => 'User.fee.edit']);
+		Route::get('/delete/{id}' , ['uses' => 'FeeController@destroy' , 'as' => 'User.fee.delete']);
 	});
+
+
 	Route::group(['prefix' => 'meter'] , function(){
 		Route::get('/create/' ,['uses' => 'MeterController@createMeter' , 'as' => 'User.meter.create']);
 		Route::post('/store/' , ['uses' => 'MeterController@storeMeter' , 'as' => 'User.meter.store']);
+		Route::get('/restore/{id}' , ['uses' => 'MeterController@restoreMeter' , 'as' => 'User.meter.restore']);
+		Route::get('/trash/' , ['uses' => 'MeterController@listTrashedMeter' , 'as' => 'User.meter.trash']);
+		
+		Route::get('/ajax/' , ['uses' => 'MeterController@getMeter' , 'as' => 'User.meter.ajax']);
 		Route::get('/list/' , ['uses' => 'MeterController@listMeter' , 'as' => 'User.meter.list']);
+		Route::get('/delete/{id}' , ['uses' => 'MeterController@deleteMeter' , 'as' => 'User.meter.delete']);
+		Route::get('/edit/{id}' , ['uses' => 'MeterController@editMeter' , 'as' => 'User.meter.edit']);
+		Route::get('/changeStatus/{id}' , ['uses' => 'MeterController@changeMeterStatus' , 'as' => 'User.meter.changestatus']);
 	});
+
+
 	Route::group(['prefix' => 'meter-reading'] , function(){
 		Route::get('/create/' , ['uses' => 'MeterController@createMeterReading' , 'as' => 'User.meter.reading.create']);
 		Route::post('/store/' , ['uses' => 'MeterController@storeMeterReading' , 'as' => 'User.meter.reading.store']);
 		Route::get('/list/' , ['uses' => 'MeterController@listMeterReading' , 'as' => 'User.meter.reading.list']);
 	});
+
+
 	Route::group(['prefix' => 'content'] , function(){
 		Route::get('/create/' , ['uses' => 'ContentsController@create' , 'as' => 'User.content.create']);
+		Route::get('/list/' , ['uses' => 'ContentsController@listContent' , 'as' => 'User.content.list']);
 		Route::post('/save/' ,  ['uses' => 'ContentsController@store' , 'as' => 'User.content.store']);
 	});
 
@@ -87,10 +100,10 @@ Route::group(['prefix' => 'user'] , function(){
 
 	Route::group(['prefix' => 'reservable'] , function(){
 		Route::get('/list/' , 	['uses' => 'ReservableController@listReservable' , 'as' => 'User.reservable.list']);
-		Route::get('/' , 		['uses' => 'ReservableController@listReservable' , 'as' => 'User.reservable.list']);
 		Route::get('/create/' , ['uses' => 'ReservableController@create' ,         'as' => 'User.reservable.create']);
 		Route::post('/save/' , 	['uses' => 'ReservableController@store' ,          'as' => 'User.reservable.store']);
 		Route::get('/edit/{id}',['uses' => 'ReservableController@edit' ,           'as' => 'User.reservable.edit']);
+		Route::get('/delete/{id}',['uses' => 'ReservableController@destroy' ,      'as' => 'User.reservable.delete']);
 		Route::get('/changeStatus/{id}' , ['uses' => 'ReservableController@changeStatus' , 'as' => 'User.reservable.changestatus']);
 	});
 

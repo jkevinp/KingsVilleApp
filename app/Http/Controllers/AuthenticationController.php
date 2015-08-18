@@ -6,17 +6,11 @@ class AuthenticationController extends Controller {
 		return view('auth.login');
 	}
 	public function signin(Request $request){
-		$email = $request->input('email');
-		$password = $request->input('password');
-		if (Auth::attempt(['email' => $email, 'password' =>$password]))
-        {
-        	if(Auth::user()->usergroup == 'admin')
-          		return redirect(route('User.index'));
-          	else if(Auth::user()->usergroup == 'homeowner')
-          		return redirect(route('HomeOwner.index'));
+		if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])){
+        	if(Auth::user()->usergroup == 'admin')return redirect(route('User.index'));
+          	else if(Auth::user()->usergroup == 'homeowner')return redirect(route('HomeOwner.index'));
         }
-        else
-        {
+        else{
         	return redirect()->back()->withErrors('Invalid Login credentials.');	
         }
 	}

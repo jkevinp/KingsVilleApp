@@ -43,11 +43,9 @@ class FeeController extends Controller {
 	 */
 	public function store(Request $request)
 	{
-		$input = $request->all();
-		if($this->fee->store($input))
-			return redirect()->route('User.fee.list')->withMessages('Fee has been saved.');
-		else
-			return redirect()->back()->withErrors('Something went wrong. Unable to save record');
+		$input =  $request->all();
+		if($this->fee->store($input)) return redirect()->route('User.fee.list')->with('flash_message','Fee has been saved.');
+		else return redirect()->back();
 
 	}
 	public function changeStatus($id){
@@ -56,11 +54,25 @@ class FeeController extends Controller {
 		else 
 			return redirect()->back()->with('errors' , 'Unable to change fee status.');
 	}
-
+	public function restore($id){//Done
+		$fee = $this->fee->findTrash($id);
+		if($fee){
+			$fee->restore();
+			return redirect()->back()->with('flash_message' , 'Fee restored!');
+		}
+		return redirect()->back()->withErrors('Trash Fee not found!');
+	}
 	public function listFee(){
 		$obj = $this->fee->all();
 		return view('self.blade.fee.list')
 				->withTitle('Fees Viewer')
+				->withObj($obj);
+	}
+	public function listTrashedFee(){
+		$obj = $this->fee->trashAll();
+
+		return view('self.blade.fee.trash')
+				->withTitle('Deleted Fees Viewer')
 				->withObj($obj);
 	}
 
@@ -103,9 +115,14 @@ class FeeController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function destroy($id) //done
 	{
-		//
+		if($fee  = $this->fee->find($id))
+		{
+			$fee->delete();
+			return redirect()->back()->with('flash_message' , 'Successfully Deleted Fee');
+		}
+		return redirect(route('User.fee.list'))->withErrors('Fee does not exist');
 	}
 
 }

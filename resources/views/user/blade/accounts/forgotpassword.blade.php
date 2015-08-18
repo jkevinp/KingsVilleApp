@@ -1,50 +1,52 @@
-@extends('user.layout.layout')
+@extends('guest.layout.layout')
 
-@section('title')
-  KingsVille- Verify New User
-@stop
+
 
 @section('content')
+<div class=" blurlogin">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-offset-2">
+                    <div class="intro-message">
+                        <h1>Forgot Password</h1>
+                        <hr class="intro-divider">
+                          <div class="row alert">
+                            @if (count($errors) > 0)
+                              <div class='alert alert-danger'>
+                                <ul>
+                                  @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                  @endforeach
+                                    </ul>
+                                </div>
+                            @endif
 
-
-
-
-<div class="row mt">
-                  <div class="col-lg-12">
-                      <h4><i class="fa fa-user-add"></i> Forgot Password</h4>
-                      <div class="form-panel">
-                          <div class=" form">
-                              <form class="cmxform form-horizontal style-form"  method="post" action="{{route('User.account.sendpassword')}}">
+               <form class="form-horizontal form-group-lg form-horizontal style-form"  method="post" action="{{route('User.account.sendpassword')}}">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                
-
-                                <h2 class="violet">Personal Information</h2>
-                                <hr>
-
-                                <div class="form-group ">
-                                      <label for="cemail" class="control-label col-lg-2">Email-Address*</label>
-                                      <div class="col-lg-3">
-                                          <input class="form-control " id="cemail" type="Email" name="email" required="" placeholder="Email-Address">
-                                      </div>
-
-                                  </div>
-                                   <div class="form-group ">
-                                      <label for="cemail" class="control-label col-lg-2">Confirm Email-Address*</label>
-                                      <div class="col-lg-3">
-                                          <input class="form-control " id="cemail" type="Email" name="email1" required="" placeholder="Repeat Email-Address">
-                                      </div>
-
-                                  </div>
-                                
-                                  <div class="form-group">
-                                      <div class="col-lg-offset-2 col-lg-10">
-                                          <button class="btn btn-theme " type="submit">Submit</button>
-                                          <button class="btn btn-theme04" type="button">Reset</button>
-                                      </div>
-                                  </div>
-                              </form>
-                          </div>
-                      </div><!-- /form-panel -->
-                  </div><!-- /col-lg-12 -->
+                <div class="form-group ">
+                  <input type="email" placeholder="Email Address" autocomplete="off" class="form-control input-lg opacity5" name="email" value="" >
+                </div>
+                <div class="form-group">
+                  <input type="email"  name="email1" autocomplete="off" placeholder='Confirm Email Address' class='form-control input-lg opacity5' value="">
+                </div>
+                                <br/>
+                <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                  <div class="btn-group" role="group">
+                       <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+                    </div>
+                    <div class="btn-group" role="group">
+                            <a class="btn btn-warning btn-lg" href="{{route('auth.login')}}">Cancel</a>
+                    </div>
+                 
+                </div>
+                </form>
               </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
 @stop

@@ -15,6 +15,7 @@ class EloquentContentsRepository implements ContentsContract{
 	}
 	public function store($param){
 		$param['id'] = c::GenerateId('Ann' , str_random(3));
+		if(c::validate($param ,(new Contents)->rules))
 		return Contents::create($param);
 	}
 	public function edit($id, $param){

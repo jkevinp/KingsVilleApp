@@ -49,9 +49,24 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 * @var array
 	 */
 	protected $hidden = ['password', 'remember_token'];
+	public $rules = [
+						'forgot' => [
+										'email' => 'required|email|exists:users',
+										'email1' => 'required|email|same:email'
+									]	
+					];
+
 	public function transactions()
 	{
 		return $this->hasMany('KingsVilleApp\Transaction' , 'account_id');
+	}
+	public function contents()
+	{
+		return $this->hasMany('KingsVilleApp\Contents');
+	}
+	public function meterreadings()
+	{
+		return $this->hasMany('KingsVilleApp\MeterReadings');
 	}
 
 }

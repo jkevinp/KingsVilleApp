@@ -24,7 +24,6 @@ class EloquentUserRepository implements UserContract{
 			return $newUser;
 		}
 	}
-
 	public function changeStatus($id){
 		$user = $this->find($id);
 		if($user){
@@ -33,7 +32,6 @@ class EloquentUserRepository implements UserContract{
 			return $user->save();
 		}
 		return false;
-
 	}
 	public function edit($id, $param){
 
@@ -45,13 +43,14 @@ class EloquentUserRepository implements UserContract{
 		if(!$operator) $operator = '=';
 		return User::where($field, $operator , $param)->first();
 	}
-
-	
 	public function findAllBy($field, $param , $operator = false){
 		if(!$operator) $operator = '=';
 		return User::where($field, $operator , $param);
 	}
 	public function search($query){
 		return User::where('firstname', 'like', '%'.$query.'%')->get();
+	}
+	public function getRules($ruleName){
+		return ((new User)->rules[$ruleName]);
 	}
 }

@@ -13,25 +13,36 @@ use SoftDeletes;
 							'currentreading',
 							'readingdate',
 							'details',
-							'deleted_at',
-							'created_at',
-							'updated_at'
 							];
 	public $hidefields =  [];
 	public $form =  [
-						'name' => ['type' => 'text'],
-						'description' => ['type' => 'textarea'],
-						'flatrate' => ['type' => 'number'],
-						'status' => ['type' => 'select' , 'values' => ['active' => 'active' , 'inactive'=>'inactive']]
+						
+						'lastreading' => ['type' => 'number' , 'others' =>  ['readonly']],
+						'currentreading' => ['type' => 'number'],
+						'details' => ['type' => 'textarea']
+						
+						
 					];
-	
+	public $rules = [
+						'meter_id' => 'required|exists:meter,id',
+						'readingdate' => 'required|date',
+						'currentreading' => 'required|numeric',
+						'lastreading' => 'required|numeric'
+
+					];
 
     /**
      * The attributes that should be mutated to dates.
      *
      * @var array
      */
-    protected $dates = ['deleted_at'];
+    protected $dates = ['deleted_at' , 'readingdate'];
+    public function user(){
+		return $this->belongsTo('KingsVilleApp\User' , 'userid');
+	}
+	public function meter(){
+		return $this->belongsTo('KingsVilleApp\Meter' , 'id');
+	}
 	public function getForm(){
 		return Helpers\cHelpers::MakeForm($this->form);
 	}

@@ -23,12 +23,23 @@ use SoftDeletes;
 						'status' => ['type' => 'select' , 'values' => ['active' => 'active' , 'inactive'=>'inactive']]
 					];
 	
-
+	public $rules = [
+						'readingunit' => 'required',
+						'user_id' => 'required|exists:users,id|unique:meter,user_id|min:1',
+						'status' => 'required'
+					];
     /**
      * The attributes that should be mutated to dates.
      *
      * @var array
      */
+    public function meterreading()
+	{
+		return $this->hasMany('KingsVilleApp\MeterReading' , 'meter_id');
+	}
+    public function user(){
+		return $this->belongsTo('KingsVilleApp\User' , 'userid');
+	}
     protected $dates = ['deleted_at' , 'created_at' , 'updated_at'];
 	public function getForm(){
 		return Helpers\cHelpers::MakeForm($this->form);

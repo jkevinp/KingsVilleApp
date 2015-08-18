@@ -7,6 +7,7 @@ use KingsVilleApp\Meter;
 use KingsVilleApp\MeterReading;
 use KingsVilleApp\Helpers\cHelpers as c;
 use DB;
+use DateTime;
 class EloquentMeterRepository implements MeterContract{
 	public function allMeter(){
 		return Meter::all();
@@ -14,24 +15,21 @@ class EloquentMeterRepository implements MeterContract{
 	public function allMeterReading(){
 		return MeterReading::all();
 	}
-	public function find($id){
-		return User::find($id);
-	}
-	public function all(){
-		return User::all();
-	}
-	public function count(){
-		return User::all()->count();
+	public function findMeter($id){
+		return Meter::find($id);
 	}
 	public function storeMeterReading($param){
-	
+		//2015-07-18
+		$explode = explode('-', $param['readingdate']);
+		$param['readingdate'] = $explode[2].'-'.$explode[0].'-'.$explode[1];
+		$param['id'] = c::GenerateId('meter-reading' , str_random(1));
+		if(c::validate($param , (new MeterReading)->rules)){
+			return MeterReading::create($param);
+		}
 	}
 	public function storeMeter($param){
-
-		if($count = $this->findBy('user_id' , $param['user_id'])->count() > 0) return false;
-		
 		$param['id'] = c::GenerateId('meter' , str_random(1));
-		return Meter::create($param);
+		if(c::validate($param , (new Meter)->rules))return Meter::create($param);
 	}
 
 	public function changeStatus($id){
@@ -74,5 +72,11 @@ class EloquentMeterRepository implements MeterContract{
                       ->whereRaw('meter.user_id = users.id');
             })->lists('id' , 'id');
        
+	}
+	public function findMeterTrash($id){
+		return Meter::onlyTrashed()->where('id','=' , $id)->first();
+	}
+	public function trashMeterAll(){
+		return Meter::onlyTrashed()->get();
 	}
 }

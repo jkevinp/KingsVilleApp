@@ -21,6 +21,7 @@
 			"KingsVilleApp\\": "app/",
 			"KingsVilleApp\\Repositories\\Contracts\\": "app/Repositories/Contracts/",
 			"KingsVilleApp\\Repositories\\Eloquent\\": "app/Repositories/Eloquent/"
+			
 		},
 		"files": [
 			"app/Helpers/cHelpers.php"

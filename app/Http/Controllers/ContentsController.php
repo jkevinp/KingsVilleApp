@@ -27,7 +27,10 @@ class ContentsController extends Controller {
 		if($this->contents->store($input))
 			return redirect()->back()->with('flash_message' , 'Successfully added new Announcement!');
 		else 
-			return redirect()->back()->withErrors('Unabled to save announcement');
+			return redirect()->back();
+	}
+	public function listContent(){
+		return view('self.blade.content.list')->with('contents' , $this->contents->all());
 	}
 
 	public function show($id){

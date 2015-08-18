@@ -60,7 +60,7 @@
             </section>
     </section>
     <!--footer start-->
-       <footer class="site-footer">
+       <footer class="site-footer black-bg" style="position:fixed;bottom:0;left:0;right:0;">
           <div class="text-center">
               2015 - KingsVille Homeowner's Association
               <a href="" class="go-top">
@@ -85,14 +85,25 @@
     <!--script for this page-->
     <script type="text/javascript" src="{{URL::asset($env)}}/js/jquery-ui-1.9.2.custom.min.js"></script>
     <!--custom switch-->
+
     <script type="text/javascript" src="{{URL::asset($env)}}/js/bootstrap-switch.js"></script>
     
     <!--custom tagsinput-->
     <script type="text/javascript" src="{{URL::asset($env)}}/js/selectize.min.js"></script>
     <script type="text/javascript" src="{{URL::asset($env)}}/js/jquery.tagsinput.js"></script>
     <script src="{{URL::asset($env)}}/js/lightbox.min.js"></script>
-    
     <script src="{{URL::asset($env)}}/js/bootbox.min.js"></script>
+    {!! Html::script('links.js')  !!}
+    <!-- dates -->
+    {!! Html::script($env.'/js/date/date.js')  !!}
+    {!! Html::script($env.'/js/date/bootstrap-datepicker.js')  !!}
+    {!! Html::script($env.'/js/date/bootstrap-datetimepicker.js')  !!}
+    {!! Html::script($env.'/js/date/daterangepicker.js')  !!}
+    {!! Html::script($env.'/js/date/moment.min.js')  !!}
+    {!! Html::script($env.'/js/date/bootstrap-timepicker.js')  !!}
+    {!! Html::script($env.'/js/advanced-form-components.js')  !!}
+
+
     <!--footer js end-->
 
 

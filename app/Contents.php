@@ -16,6 +16,13 @@ class Contents extends Model {
 	 * @var array
 	 */
 	protected $dates = ['created_at'];
+	public $rules = [
+						'title' => 'required|min:5|max:255',
+						'content' => 'required|min:10|max:10000'
+					];
+	public function user(){
+		return $this->belongsTo('KingsVilleApp\User' , 'userid');
+	}
 	public  function getForm(){
 		return Helpers\cHelpers::MakeForm($this->form);
 	}

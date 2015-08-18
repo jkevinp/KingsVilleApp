@@ -11,4 +11,6 @@ interface ReservableContract{
 	public function changeStatus($id);
 	public function getFillable();
 	public function getForm();
+	public function trashAll();
+	public function findTrash();
 }

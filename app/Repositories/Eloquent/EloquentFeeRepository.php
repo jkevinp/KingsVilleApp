@@ -12,10 +12,18 @@ class EloquentFeeRepository implements FeeContract{
 	public function count(){
 		return Fee::all()->count();
 	}
+	public function findTrash($id){
+		return Fee::onlyTrashed()->where('id','=' , $id)->first();
+	}
+	public function trashAll(){
+		return Fee::onlyTrashed()->get();
+	}
 	public function store($param){
-		$param['id'] = c::GenerateId('fee'.$param['type'] , $param['name']);
+
+		$param['id'] = c::GenerateId('fee' , str_random(5));
 		$param['status']= 'active';
-		return Fee::create($param);
+		if(c::validate( $param , (new Fee)->rules))
+			return Fee::create($param);
 	}
 	public function changeStatus($id){
 		$fee = $this->find($id);
@@ -25,13 +33,15 @@ class EloquentFeeRepository implements FeeContract{
 			return $fee->save();
 		}
 		return false;
-
 	}
 	public function edit($id, $param){
 
 	}
 	public function findBy($field, $param){
 		return Fee::where($field, '=' , $param)->get()->first();
+	}
+	public function findAllBy($field, $param){
+		return Fee::where($field, '=' , $param)->get();
 	}
 	public function search($query){
 		return Fee::where('firstname', 'like', '%'.$query.'%')->get();

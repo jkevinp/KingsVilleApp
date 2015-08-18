@@ -11,7 +11,7 @@
 						<hr>
 						{!! $inject or '' !!}
 						{!! $form !!}
-						{!! Form::submit('submit' , ['class' => 'btn btn-theme']) !!}
+						{!! Form::submit('submit' ,['class' => 'btn btn-theme'  ]) !!}
 						{!! Form::submit('Reset' , ['class' => 'btn btn-theme04']) !!}
 						{!! Form::close() !!}
                          </div>
@@ -22,7 +22,7 @@
 
 @section('script')
 <script type="text/javascript">
-	<?php echo $injectjs; ?> 
+	<?php if(!empty($injectjs))echo $injectjs; ?> 
 	
 </script>
 @stop

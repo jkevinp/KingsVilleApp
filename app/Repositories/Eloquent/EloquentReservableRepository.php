@@ -49,4 +49,10 @@ class EloquentReservableRepository  implements ReservableContract{
 		}
 		return $showableFields;
 	}
+	public function trashAll(){
+		
+	}
+	public function findTrash(){
+
+	}
 }

@@ -2,7 +2,8 @@
 
 use KingsVilleApp\User;
 use KingsVilleApp\Repositories\Contracts\ContentsContract;
-
+use Session;
+use Illuminate\Http\Request;
 class HomeController extends Controller {
 
 	/*

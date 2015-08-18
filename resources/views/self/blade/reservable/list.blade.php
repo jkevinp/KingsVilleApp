@@ -28,7 +28,7 @@
     <div class="showback">
        <table class="table table-bordered table-striped table-condensed">
           <h4><i class="fa fa-angle-right"></i> Reservable Properties
-             <span class="badge badge-pr">{{$obj->count()}}</span>
+             <span class="badge bg-primary">{{$obj->count()}}</span>
              <span class="pull-right">
              </span>
           </h4>
@@ -64,7 +64,7 @@
                       </td>
                     
                       <td>
-                        <a class="btn btn-danger btn-xs" title="Delete Reservable Property"><i class="fa fa-trash-o "></i></a>
+                        <a href="{{route('User.reservable.delete' , $t->id)}}" class="btn btn-danger btn-xs" title="Delete Reservable Property" title="Delete Reservable Property"><i class="fa fa-trash-o "></i></a>
                         <a href="{{route('User.reservable.edit' , $t->id)}}" class="btn btn-xs btn-theme" title="Edit Reservable Property"><i class="fa fa-edit"></i></a>
                         @if($t->status =='inactive') 
                         <a href="{{route('User.reservable.changestatus' ,   $t->id)}}" class="btn btn-xs btn-theme03" title="Activate Property"><i class="fa fa-power-off"></i></a> 

@@ -41,7 +41,11 @@ class ReservableController extends Controller {
 		
 	}
 	public function destroy($id){
-		
+		if($reservable = $this->reservable->find($id)){
+			$reservable->delete();
+			return redirect()->back()->with('flash_message' , 'Reservable has been deleted.');
+		}
+		return redirect()->back()->withErrors('Reservable property does not exists.');
 	}
 
 }

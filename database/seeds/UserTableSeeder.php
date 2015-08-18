@@ -10,6 +10,7 @@ class UserTableSeeder extends Seeder {
         DB::table('users')->delete();
         
         User::create([
+            'id' => str_random(25),
         	'email' => 'foo@bar.com' ,
         	'firstname' => 'foo',
         	'middlename' => 'at',
@@ -20,10 +21,12 @@ class UserTableSeeder extends Seeder {
         	'landline'=> '69',
         	'address' => 'red district',
             'usergroup' => 'admin',
-            'status' => 'active'
+            'status' => 'active',
+            'linktoken' => str_random(25)
 
         	]);
         User::create([
+            'id' => str_random(25),
             'email' => 'bar@foo.com' ,
             'firstname' => 'bar',
             'middlename' => 'at',
@@ -34,6 +37,8 @@ class UserTableSeeder extends Seeder {
             'landline'=> '69',
             'address' => 'red district',
             'usergroup' => 'homeowner',
-            'status' => 'active']);
+            'status' => 'active',
+            'linktoken' => str_random(25)
+            ]);
     }
 }

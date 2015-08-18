@@ -12,7 +12,6 @@ class AuthMiddleWare {
 	 * @return mixed
 	 */
 	 public function handle($request, Closure $next){
-
 	 	if(Auth::check()){
             if (Auth::user()->usergroup == 'admin'){
             	return $next($request);

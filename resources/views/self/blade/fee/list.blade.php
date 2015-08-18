@@ -49,7 +49,7 @@
               <td>{{$t['status']}}</td>
               <td>{{$t['rate']}}@if('type' == 'percentage')%@endif</td>
               <td>
-                 <a class="btn btn-danger btn-xs" title="Delete Fee"><i class="fa fa-trash-o"></i> </a>
+                  <a href="{{route('User.fee.delete' , $t->id)}}" class="btn btn-danger btn-xs" title="Delete Fee"><i class="fa fa-trash-o"></i> </a>
                   <a href="{{route('User.fee.edit' , $t->id)}}" class="btn btn-xs btn-theme" title="Edit Fee"><i class="fa fa-edit"></i></a>
                   @if($t->status =='inactive') 
                   <a href="{{route('User.fee.changestatus' ,   $t->id)}}" class="btn btn-xs btn-theme03" title="Activate Fee"><i class="fa fa-power-off"></i></a> 

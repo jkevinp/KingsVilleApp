@@ -3,8 +3,7 @@
 interface MeterContract{
 		public function allMeter();
 		public function allMeterReading();
-		public function find($id);
-		public function count();
+		public function findMeter($id);
 		public function storeMeterReading($param);
 		public function storeMeter($param);
 		public function edit($id, $param);
@@ -15,4 +14,6 @@ interface MeterContract{
 		public function getMeterForm();
 		public function getMeterReadingForm();
 		public function getNoMeter();
+		public function trashMeterAll();
+		public function findMeterTrash($id);
 }

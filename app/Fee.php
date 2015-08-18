@@ -4,9 +4,9 @@ namespace KingsVilleApp;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-class Fee extends Model  {
+class Fee extends Model {
 
-use SoftDeletes;
+	use SoftDeletes;
 	/**
 	 * The database table used by the model.
 	 *
@@ -24,7 +24,7 @@ use SoftDeletes;
 	public $hidefields = ['id' , 'status'];
 	public $form =  [
 						'name' => ['type'=>'text'],
-						'transactiontype' => ['type' => 'select' , 'values' => ['water' => 'water' , 'anal' => 'anal']],
+						'transactiontype' => ['type' => 'select' , 'values' => ['water' => 'water' , 'annual' => 'annual']],
 						'type' => [
 												'type'=>'select' , 
 												'values' => ['fixed' => 'By Fixed value' ,'percentage'=>'By Percentage']
@@ -33,13 +33,12 @@ use SoftDeletes;
 						'status' => ['type'=>'select' , 'values' => ['active' => 'Active' , 'inactive' => 'Inactive']],
 						'rate' =>   ['type' => 'number']
 					];
+	public $rules = [
+						'name' => 'required|unique:fee'
+					];
 
-	/**
-	 * The attributes excluded from the model's JSON form.
-	 *
-	 * @var array
-	 */
-	public  function getForm(){
+
+	public function getForm(){
 		return Helpers\cHelpers::MakeForm($this->form);
 		
 	}

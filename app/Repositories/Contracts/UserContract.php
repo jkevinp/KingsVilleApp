@@ -11,4 +11,5 @@ interface UserContract{
 		public function changeStatus($id);
 		public function findAllBy($field, $param,$operator);
 		public function getList($param);
+		public function getRules($ruleName);
 }

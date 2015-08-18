@@ -10,6 +10,10 @@
     left: 20px;
     right: auto;
 }
+#gritter-notice-wrapper.center {
+    left: 400px;
+    right: auto;
+}
 #gritter-notice-wrapper.bottom-right {
     top: auto;
     left: auto;
@@ -100,3 +104,4 @@
 .gritter-light .gritter-title {
     text-shadow: none;
 }
+

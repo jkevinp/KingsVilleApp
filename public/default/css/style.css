@@ -238,7 +238,7 @@ ul.top-menu > li > .logout {
 /*sidebar navigation*/
 
 #sidebar {
-    width: 210px;
+    width: 201px;
     height: 100%;
     position: fixed;
     color:white;
@@ -2232,7 +2232,6 @@ label {
 
 /*footer*/
 .site-footer {
-    background: #68dff0;
     color: #fff;
     padding: 10px 0;
 }

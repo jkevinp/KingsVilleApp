@@ -48,7 +48,13 @@
               <td>{{$t['status']}}</td>
               <td>{{$t['details']}}</td>
               <td>
-                 
+                  <a href="{{route('User.meter.delete' , $t['id'] )}}" class="btn btn-danger btn-xs" title="Delete Meter"><i class="fa fa-trash-o"></i> </a>
+                  <a href="{{route('User.meter.edit' , $t['id'] )}}" class="btn btn-xs btn-theme" title="Edit Meter"><i class="fa fa-edit"></i></a>
+                  @if($t->status =='inactive') 
+                  <a href="{{route('User.meter.changestatus' ,   $t['id'] )}}" class="btn btn-xs btn-theme03" title="Activate Meter"><i class="fa fa-power-off"></i></a> 
+                  @else
+                  <a href="{{route('User.meter.changestatus' ,   $t['id']  )}}" class="btn btn-xs btn-theme04" title="Deactivate Meter"><i class="fa fa-power-off"></i></a>
+                  @endif  
               </td>
           </tr>
     @endforeach
