@@ -1,23 +1,7 @@
 <?php namespace KingsVilleApp\Providers;
-
 use Illuminate\Support\ServiceProvider;
-
-use KingsVilleApp\Repositories\Eloquent\EloquentHomeOwnerRepository;
-use KingsVilleApp\Repositories\Contracts\HomeOwnerContract;
-
-
-use KingsVilleApp\Repositories\Eloquent\EloquentUserRepository;
-use KingsVilleApp\Repositories\Contracts\UserContract;
-
-use KingsVilleApp\Repositories\Eloquent\EloquentMailRepository;
-use KingsVilleApp\Repositories\Contracts\MailContract;
-
-use KingsVilleApp\Repositories\Eloquent\EloquentReservationRepository;
-use KingsVilleApp\Repositories\Contracts\ReservationContract;
-
-
-use KingsVilleApp\Repositories\Eloquent\EloquentReservableRepository;
-use KingsVilleApp\Repositories\Contracts\ReservableContract;
+use KingsVilleApp\Repositories\Eloquent;
+use KingsVilleApp\Repositories\Contracts;
 
 
 class AppServiceProvider extends ServiceProvider {
@@ -43,10 +27,8 @@ class AppServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		$this->app->bind(
-			'Illuminate\Contracts\Auth\Registrar',
-			'KingsVilleApp\Services\Registrar'
-		);
+		$this->app->bind('Illuminate\Contracts\Auth\Registrar',
+						'KingsVilleApp\Services\Registrar');
 	
 		$this->app->bind('KingsVilleApp\Repositories\Contracts\ContentsContract',
 						 'KingsVilleApp\Repositories\Eloquent\EloquentContentsRepository');
@@ -71,6 +53,9 @@ class AppServiceProvider extends ServiceProvider {
 
 		$this->app->bind('KingsVilleApp\Repositories\Contracts\MeterContract',
 						 'KingsVilleApp\Repositories\Eloquent\EloquentMeterRepository');
+
+		$this->app->bind('KingsVilleApp\Repositories\Contracts\BillContract',
+						 'KingsVilleApp\Repositories\Eloquent\EloquentBillRepository');
 	}
 
 }

@@ -37,8 +37,12 @@ use SoftDeletes;
 	{
 		return $this->hasMany('KingsVilleApp\MeterReading' , 'meter_id');
 	}
+	public function bill()
+	{
+		return $this->hasMany('KingsVilleApp\Bill' , 'meter_id');
+	}
     public function user(){
-		return $this->belongsTo('KingsVilleApp\User' , 'userid');
+		return $this->belongsTo('KingsVilleApp\User' , 'user_id' , 'id');
 	}
     protected $dates = ['deleted_at' , 'created_at' , 'updated_at'];
 	public function getForm(){

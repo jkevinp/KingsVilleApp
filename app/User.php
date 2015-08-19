@@ -64,6 +64,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	{
 		return $this->hasMany('KingsVilleApp\Contents');
 	}
+	public function meter()
+	{
+		return $this->hasMany('KingsVilleApp\Meter' , 'user_id');
+	}
 	public function meterreadings()
 	{
 		return $this->hasMany('KingsVilleApp\MeterReadings');

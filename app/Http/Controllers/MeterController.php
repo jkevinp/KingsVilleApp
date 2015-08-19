@@ -6,8 +6,8 @@ use KingsVilleApp\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use KingsVilleApp\Repositories\Contracts\MeterContract as mc;
 use KingsVilleApp\Repositories\Contracts\UserContract as uc;
-
 use KingsVilleApp\Repositories\Contracts\FeeContract as fc;
+use KingsVilleApp\Repositories\Contracts\BillContract as bc;
 use KingsVilleApp\Helpers\cHelpers as c;
 class MeterController extends Controller {
 
@@ -17,10 +17,11 @@ class MeterController extends Controller {
 	 * @return Response
 	 */
 
-	public function __construct(mc $mc , uc $uc , fc $fc){
+	public function __construct(mc $mc , uc $uc , fc $fc, bc $bc){
 		$this->meter = $mc;
 		$this->user  = $uc;
 		$this->fee = $fc;
+		$this->bill = $bc;
 	}
 	public function createMeterReading(){
 		$meters = $this->meter->allMeter();
@@ -29,32 +30,13 @@ class MeterController extends Controller {
 					'meter_id' => ['type' => 'select' , 'values' => $list , 'class' => ''],
 					'readingdate' => ['type' => 'date']
 				];
-
-		$injectjs = "
-					$('#meter_id').selectize();
-					$('#meter_id').on('change', function(){
-						var meterid= $('#meter_id').val();
-						console.log(meterid);
-						$.get('".route('User.meter.ajax')."' ,{meterid: meterid} , function(data){
-							var snip = 'Meter Details<br/>';
-							snip += 'User:' + data.meter.user_id;
-							if(data.reading != null){
-								$('#lastreading').val(data.reading.currentreading);
-							}else {
-								$('#lastreading').val(0);
-							}
-							bootbox.alert(snip);
-						});
-					});
-					$('#meter_id').change();
-					";
-		
 		return view('self.blade.empty.form')
 				->with('formTitle' , 'Create new Meter Reading')
 				->with('form' , $this->meter->getMeterReadingForm())
 				->withRoute(route('User.meter.reading.store'))
 				->withInject(c::MakeForm($form))
-				->with('injectjs' , $injectjs);
+				->with('js' , 'default\js\ajax\meter-reading-create.js')
+				->with('col' , '6');
 	}
 	public function createMeter(){
 		$form = $this->meter->getMeterForm();
@@ -68,12 +50,13 @@ class MeterController extends Controller {
 				->withRoute(route('User.meter.store'))
 				->withInject(c::MakeForm($user))
 				->with('injectjs' , $injectjs);
-		
-		
 	}
 	public function storeMeter(Request $request){
 		$input = $request->all();
-		if($this->meter->storeMeter($input))return redirect()->back()->with('flash_message' , 'Successfully Added new meter');
+		if($this->meter->storeMeter($input)){
+
+			return redirect()->back()->with('flash_message' , 'Successfully Added new meter');
+		}
 		else return redirect()->back();
 	}
 	public function restoreMeter($id){
@@ -88,25 +71,35 @@ class MeterController extends Controller {
 		$input = $request->all();
 		if($meterreading = $this->meter->storeMeterReading($input)){
 			$fees = $this->fee->findAllBy('transactiontype' , 'water')->lists('type' , 'rate');
-			$bill = 0;
-
-			$consumption =$meterreading->currentreading - $meterreading->lastreading;
+			$amount = 0;
+			$consumption = $meterreading->currentreading - $meterreading->lastreading;
 			foreach ($fees as $key => $v) {
+				if($v == 'fixed')$amount += $key;
+				else if($v =='unit')$amount += $consumption * $key;
+			}
 				
-				if($v == 'fixed'){
-					$bill += $key;
-				}
-				else if($v =='unit'){
-					$bill += $consumption * $key;
-				}
+			foreach ($fees as $key => $v){
+				if($v == 'percentage')$amount = $amount + ($amount * ($key /100));
 			}
-			//return redirect()->back()->with('flash_message' , 'Successfully Added new meter reading');
-			foreach ($fees as $key => $v) {
-				if($v == 'percentage')
-					$bill = $bill + ($bill * ($key /100));
+			$input['meterreadings_id'] = $meterreading->id;
+			
+			$input['amount'] = $amount;
+			$input['datestart'] = $meterreading->readingdate;
+			$input['duedate'] =   $meterreading->readingdate;
+			$input['dateend'] =   $meterreading->readingdate;
+			$input['meter_id'] = $meterreading->meter_id;
+			$input['status'] =  'active';
+			dd($amount);
+			$bill = $this->bill->store($input);
+			if($bill && $meterreading){
+				return redirect(route('User.bill.show' , $bill->id));
+			}else{
+				$bill->delete();
+				$meterreading->delete();
+				return redirect()->back();
 			}
-			echo $bill;
-		}else return redirect()->back();
+		}
+		else return redirect()->back();
 	}
 	public function getAllMeter(){
 		return $this->meter->allMeter();
@@ -116,7 +109,7 @@ class MeterController extends Controller {
 		$input =$request->all();
 		//$input['meterid'] = 'meterLrB20150817223802M';
 		return 	[
-					'meter' => $this->meter->findMeter($input['meterid']) , 
+					'meter' =>   $this->meter->findMeter($input['meterid']) , 
 					'reading' => $this->meter->findMeter($input['meterid'])->meterreading->last()
 				];
 	}

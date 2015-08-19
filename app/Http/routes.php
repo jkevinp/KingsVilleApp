@@ -67,11 +67,16 @@ Route::group(['prefix' => 'user'] , function(){
 		Route::get('/changeStatus/{id}' , ['uses' => 'MeterController@changeMeterStatus' , 'as' => 'User.meter.changestatus']);
 	});
 
+	Route::group(['prefix' => 'bill'] , function(){
+		Route::get('/store/' ,['uses' => 'BillController@store' , 'as' => 'User.bill.store']);
+		Route::get('/show/{id}' , ['uses' => 'BillController@show' , 'as' => 'User.bill.show']);
+	});
+
 
 	Route::group(['prefix' => 'meter-reading'] , function(){
 		Route::get('/create/' , ['uses' => 'MeterController@createMeterReading' , 'as' => 'User.meter.reading.create']);
 		Route::post('/store/' , ['uses' => 'MeterController@storeMeterReading' , 'as' => 'User.meter.reading.store']);
-		Route::get('/list/' , ['uses' => 'MeterController@listMeterReading' , 'as' => 'User.meter.reading.list']);
+		Route::get('/list/' ,   ['uses' => 'MeterController@listMeterReading' , 'as' => 'User.meter.reading.list']);
 	});
 
 

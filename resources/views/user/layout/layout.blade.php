@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="Dashboard">
     <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-    <title>Sunrock - Admin Dashboard</title>
+    <title>Admin Dashboard-Khoa</title>
     <link rel="shortcut icon" href="{{ asset('default') }}/img/icons/favicon.ico">
     <!-- Bootstrap core CSS -->
     <link href="{{URL::asset('default')}}/css/bootstrap.css" rel="stylesheet">
