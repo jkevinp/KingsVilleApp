@@ -4,40 +4,35 @@ use KingsVilleApp\Http\Requests;
 use KingsVilleApp\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
-use KingsVilleApp\Repositories\Contracts\ReservationContract;
-
-use KingsVilleApp\Repositories\Contracts\ReservableContract;
-
-class ReservationController extends Controller {
+use KingsVilleApp\Repositories\Contracts\BillTypeContract as btc;
+use Response;
+class BillTypeController extends Controller {
 
 	/**
 	 * Display a listing of the resource.
 	 *
 	 * @return Response
 	 */
-	public function __construct(ReservationContract $rc , ReservableContract $rcc)
-	{
-		$this->reservation = $rc;
-		$this->reservable = $rcc;
+	public function __construct(btc $btc){
+		$this->billtype = $btc;
 	}
 
-	public function index(){
-		
+	public function listBillType()
+	{
+		$obj = $this->billtype->all();
+		return view('self.blade.billtype.list')->withObj($obj)->withTitle('Bill type list');
 	}
+
 	/**
 	 * Show the form for creating a new resource.
 	 *
 	 * @return Response
 	 */
-	public function create()
-	{
-		$form = $this->reservation->getForm();
+	public function create(){
 		return view('self.blade.empty.form')
-				->withForm($form)
-				->with('formTitle','Create new Reservable')
-				->withRoute(route('User.reservation.store'));
-		dd($this->reservable->all());
-
+		->withForm($this->billtype->getForm())
+		->with('formTitle','Create new bill type')
+		->withRoute(route('User.bill.type.store'));
 	}
 
 	/**
@@ -45,9 +40,20 @@ class ReservationController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(Request $request)
 	{
-		//
+		$input = $request->all();
+		if($billtype = $this->billtype->store($input)){
+			return redirect()->back()->with('flash_message' , 'Bill Type has been added.');
+		}
+		return redirect()->back();
+	}
+	public function search(Request $request){
+		$input = $request->all();
+		if($request->ajax() && $request->has('id')){
+			return $this->billtype->findBy('id' , $request['id']);
+		}else 
+			return Response::json(['error' => 'Input missing or not ajax' ]);
 	}
 
 	/**
@@ -56,12 +62,6 @@ class ReservationController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-
-	public function listReservation()
-	{
-		
-	}
-
 	public function show($id)
 	{
 		//

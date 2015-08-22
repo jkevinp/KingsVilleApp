@@ -5,11 +5,13 @@ use KingsVilleApp\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use KingsVilleApp\Repositories\Contracts\FeeContract;
+use KingsVilleApp\Repositories\Contracts\BillTypeContract;
 class FeeController extends Controller {
 
 
-	public function __construct(FeeContract $fee){
+	public function __construct(FeeContract $fee , BillTypeContract $btc){
 		$this->fee = $fee;
+		$this->billtype = $btc;
 	}
 
 	/**
@@ -30,10 +32,9 @@ class FeeController extends Controller {
 	public function create()
 	{
 		$form = $this->fee->getForm();
-		return view('self.blade.empty.form')
-				->withForm($form)
-				->with('formTitle','Create new Fee')
-				->withRoute(route('User.fee.store'));
+		return view('self.blade.fee.create')
+				->withRoute(route('User.fee.store'))
+				->with('billtype' , $this->billtype->all()->lists('name' , 'id'));
 	}
 
 	/**

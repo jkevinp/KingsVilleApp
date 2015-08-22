@@ -9,6 +9,11 @@
             <div class="nav notify-row" id="top_menu">
                 
             </div>
+            <div class="top-menu">
+              <ul class="nav pull-right top-menu">
+                    <li><button class="logout" href="#" id="btn_search"  ><i class="fa fa-search"> </i> </button></li>
+              </ul>
+            </div>
         
     </div>
   </header>

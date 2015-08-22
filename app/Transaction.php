@@ -4,6 +4,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Transaction extends Model {
 	use SoftDeletes;
+		public $incrementing = false;
 	protected $table = 'transaction';
 	protected $fillable = ['id' , 'name' , 'account_id' , 'description', 'amount' , 'date_charged' , 'due_date',
 							'status',

@@ -12,6 +12,7 @@ class Fee extends Model {
 	 *
 	 * @var string
 	 */
+	public $incrementing = false;
 	protected $table = 'fee';
 
 	/**
@@ -20,27 +21,32 @@ class Fee extends Model {
 	 * @var array
 	 */
 	protected $dates = ['deleted_at' , 'created_at' , 'updated_at'];
-	protected $fillable = ['id', 'name' ,'type' ,'transactiontype' ,'status', 'rate'];
+	protected $fillable = ['id', 'name' ,'type' ,'billtype_id' ,'status', 'rate'];
 	public $hidefields = ['id' , 'status'];
 	public $form =  [
 						'name' => ['type'=>'text'],
-						'transactiontype' => ['type' => 'select' , 'values' => ['water' => 'water' , 'annual' => 'annual']],
+						'billtype_id' => ['type' => 'select' , 'values' => ['water' => 'water' , 'annual' => 'annual']],
 						'type' => [
 												'type'=>'select' , 
-												'values' => ['fixed' => 'By Fixed value' ,'percentage'=>'By Percentage']
+												'values' => ['fixed' => 'By Fixed value' ,'percentage'=>'By Percentage' , 'unit'=>'Per Unit']
 
 											],
 						'status' => ['type'=>'select' , 'values' => ['active' => 'Active' , 'inactive' => 'Inactive']],
 						'rate' =>   ['type' => 'number']
 					];
 	public $rules = [
-						'name' => 'required|unique:fee'
+						'name' => 'required|unique:fee',
+						'billtype_id' => 'required|exists:billtype,id',
+						'rate' => 'numeric|min:1'
 					];
 
 
 	public function getForm(){
 		return Helpers\cHelpers::MakeForm($this->form);
 		
+	}
+	public function billtype(){
+		return $this->hasMany('KingsVilleApp\BillType', 'id', 'billtype_id');
 	}
 }
 /*SELECT `COLUMN_NAME`

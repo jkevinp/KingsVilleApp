@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Reservable extends Model {
 use SoftDeletes;
+	public $incrementing = false;
 	protected $table = 'reservable';
 	protected $fillable = ['id', 'name' ,'flatrate' ,'status'];
 	public $hidefields =  [];

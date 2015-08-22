@@ -4,23 +4,18 @@ namespace KingsVilleApp;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-class Bill extends Model {
+class BillingDetail extends Model {
 
 	use SoftDeletes;
 	public $incrementing = false;
-	protected $table = 'bill';
-	protected $dates = ['deleted_at' , 'created_at' , 'updated_at' , 'datestart' , 'dateend' ,'duedate'];
+	protected $table = 'billingdetail';
+	protected $dates = ['deleted_at' , 'created_at' , 'updated_at'];
 	protected $fillable = 	[
 								'id',
-								'status',
-								'meter_id',
-								'meterreadings_id',
-								'billtype_id',
-								'datestart',
-								'dateend',
-								'duedate',
+								'bill_id',
 								'amount',
-								'details',
+								'fee_id',
+								'unit'
 							];
 	public $hidefields = [];
 	public $form =  [
@@ -35,14 +30,11 @@ class Bill extends Model {
 						'rate' =>   ['type' => 'number']
 					];
 	public $rules = [
-						'id' => 'required|unique:bill',
-						'status' => 'required',
-						'meter_id' => 'required|exists:meter,id',
-						'datestart' => 'required|date',
-						'dateend'   => 'required|date',
-						'duedate' =>'required|date',
+						'id' => 'required',
 						'amount'  => 'required|numeric|min:0',
-						'meterreadings_id' => 'required|exists:meterreadings,id'
+						'bill_id' => 'required|exists:bill,id',
+						'fee_id' => 'required|exists:fee,id',
+						'unit' => 'required|numeric|min:1'
 					];
 	public function getForm(){
 		return Helpers\cHelpers::MakeForm($this->form);
@@ -53,11 +45,11 @@ class Bill extends Model {
 	public function meterreading(){
 		return $this->belongsTo('KingsVilleApp\MeterReading' , 'meterreadings_id' , 'id');
 	}
-	public function billtype(){
-		return $this->hasMany('KingsVilleApp\BillType' , 'id', 'billtype_id');
+	public function bill(){
+		return $this->belongsTo('KingsVilleApp\Bill' , 'bill_id', 'id');
 	}
-	public function billdetail(){
-		return $this->hasMany('KingsVilleApp\BillingDetail' , 'bill_id' , 'id');
+	public function fee(){
+		return $this->hasOne('KingsVilleApp\Fee', 'id' , 'fee_id');
 	}
 }
 /*SELECT `COLUMN_NAME`

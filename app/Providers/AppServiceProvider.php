@@ -56,6 +56,8 @@ class AppServiceProvider extends ServiceProvider {
 
 		$this->app->bind('KingsVilleApp\Repositories\Contracts\BillContract',
 						 'KingsVilleApp\Repositories\Eloquent\EloquentBillRepository');
+		$this->app->bind('KingsVilleApp\Repositories\Contracts\BillTypeContract',
+						 'KingsVilleApp\Repositories\Eloquent\EloquentBillTypeRepository');
 	}
 
 }

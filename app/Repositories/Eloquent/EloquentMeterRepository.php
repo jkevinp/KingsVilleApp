@@ -23,10 +23,12 @@ class EloquentMeterRepository implements MeterContract{
 		$explode = explode('-', $param['readingdate']);
 		$param['readingdate'] = $explode[2].'-'.$explode[0].'-'.$explode[1];
 		$param['id'] = c::GenerateId('meter-reading' , str_random(1));
+		$param['consumption'] =  $param['currentreading'] - $param['lastreading'];
 		if(c::validate($param , (new MeterReading)->rules)){
 			return MeterReading::create($param);
 		}
 	}
+	
 	public function storeMeter($param){
 		$param['id'] = c::GenerateId('meter' , str_random(1));
 		if(c::validate($param , (new Meter)->rules))return Meter::create($param);

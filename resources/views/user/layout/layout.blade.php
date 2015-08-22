@@ -28,6 +28,7 @@
     <section id="container" >
       @include('user.layout.topbar')
       @include('user.layout.sidebar')
+     
       <section id="main-content">
         <section class="wrapper">
         <div class="row mt">

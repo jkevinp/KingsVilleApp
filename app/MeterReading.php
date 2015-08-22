@@ -14,6 +14,7 @@ public $incrementing = false;
 							'currentreading',
 							'readingdate',
 							'details',
+							'consumption',
 							];
 	public $hidefields =  [];
 	public $form =  [
@@ -26,7 +27,8 @@ public $incrementing = false;
 						'meter_id' => 'required|exists:meter,id',
 						'readingdate' => 'required|date',
 						'currentreading' => 'required|numeric',
-						'lastreading' => 'required|numeric'
+						'lastreading' => 'required|numeric',
+						'consumption' => 'required|numeric|min:0'
 					];
     protected $dates = ['deleted_at' , 'readingdate'];
     public function user(){

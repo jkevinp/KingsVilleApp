@@ -28,7 +28,7 @@
   <div class="col-md-12">
     <div class="showback">
     <table class="table table-bordered table-striped table-condensed">
-    <h4><i class="fa fa-angle-right"></i> {{$title or 'Meter List'}}<span class="badge bg-primary">{{$obj->count()}}</span></h4>
+    <h4><i class="fa fa-angle-right"></i> {{$title or 'Meter Reading List'}}<span class="badge bg-primary">{{$obj->count()}}</span></h4>
     <thead>                       
       <tr>
         @if($obj->count() != 0)

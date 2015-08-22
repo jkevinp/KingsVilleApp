@@ -70,6 +70,7 @@ Route::group(['prefix' => 'user'] , function(){
 	Route::group(['prefix' => 'bill'] , function(){
 		Route::get('/store/' ,['uses' => 'BillController@store' , 'as' => 'User.bill.store']);
 		Route::get('/show/{id}' , ['uses' => 'BillController@show' , 'as' => 'User.bill.show']);
+		Route::get('/list/' , ['uses' => 'BillController@listBill' , 'as' => 'User.bill.list']);
 	});
 
 
@@ -77,6 +78,13 @@ Route::group(['prefix' => 'user'] , function(){
 		Route::get('/create/' , ['uses' => 'MeterController@createMeterReading' , 'as' => 'User.meter.reading.create']);
 		Route::post('/store/' , ['uses' => 'MeterController@storeMeterReading' , 'as' => 'User.meter.reading.store']);
 		Route::get('/list/' ,   ['uses' => 'MeterController@listMeterReading' , 'as' => 'User.meter.reading.list']);
+	});
+
+	Route::group(['prefix' => 'bill-type'] , function(){
+		Route::get('/create/' , ['uses' => 'BillTypeController@create' , 'as' => 'User.bill.type.create']);
+		Route::post('/store/' , ['uses' => 'BillTypeController@store' , 'as' => 'User.bill.type.store']);
+		Route::get('/list/' ,   ['uses' => 'BillTypeController@listBillType' , 'as' => 'User.bill.type.list']);
+		Route::get('/search/' ,   ['uses' => 'BillTypeController@search' , 'as' => 'User.bill.type.ajax']);
 	});
 
 
@@ -150,7 +158,6 @@ Route::group(['prefix' => 'homeowner'] , function(){
 		Route::get('/search/', ['uses' => 'UserController@search' , 'as' => 'HomeOwner.account.search']);
 		Route::get('/create/success', ['uses' => 'UserController@store' , 'as' => 'HomeOwner.account.create.success']);
 	});
-
 	Route::group(['prefix' => 'reservation'] , function(){
 		Route::get('/create/',['uses' => 'ReservationController@create' , 'as' => 'HomeOwner.reservation.create']);
 	});

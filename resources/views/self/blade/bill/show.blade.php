@@ -1,6 +1,7 @@
 @extends('self.layout.layout')
 
 @section('content')
+
 <div class="row mt">
 	<div class="col-lg-10 col-lg-offset-1">
 		<div class="showback">
@@ -46,7 +47,7 @@
 				<div class="clearfix"></div>
 			</div><!-- --/row ---->
 			<br>
-			<div class="well well-small green">
+			<div class="alert alert-info">
 				<div class="pull-left"> Total Due : </div>
 				<div class="pull-right"> {{$bill->amount}} </div>
 				<div class="clearfix"></div>
@@ -56,35 +57,32 @@
 	<table class="table">
 		<thead>
 		<tr>
-		<th style="width:60px" class="text-center">QTY</th>
-		<th class="text-left">DESCRIPTION</th>
-		<th style="width:140px" class="text-right">UNIT PRICE</th>
-		<th style="width:90px" class="text-right">TOTAL</th>
+			<th style="width:60px" class="text-left">Bill detail ID</th>
+			<th style="width:60px" class="text-left">UNIT/QTY</th>
+			<th style="width:60px" class="text-left">Fee Type</th>
+			<th style="width:140px" class="text-left">Fee Rate</th>
+			<th style="width:90px" class="text-left">Total</th>
 		</tr>
 		</thead>
 			<tbody>
+				@foreach($bill->billdetail as $bd)
 				<tr>
-				<td class="text-center">{{$bill->meterreading->currentreading -$bill->meterreading->lastreading }}x</td>
-				<td>{{$bill->meter->readingunit}}</td>
-				<td class="text-right">17.00</td>
-				<td class="text-right">$429.00</td>
+					<td class="text-left no-border"><strong>{{$bd->id}}</strong></td>
+					<td class="text-left">{{$bd->unit}}</td>
+					<td class="text-left">{{$bd->fee->type}}</td>
+					<td class="text-left">{{$bd->fee->rate}} @if($bd->fee->type =='percentage') % @endif </td>
+					<td class="text-left"><b>{{$bd->amount}}</b></td>
 				</tr>
-				<td colspan="2" rowspan="4"><h4>Terms and Conditions</h4>
-					<p>Thank you for your business. We do expect payment within 21 days, so please process this invoice within that time. There will be a 1.5% interest charge per month on late invoices.</p>
-				</td><td class="text-right"><strong>Subtotal</strong></td>
-				<td class="text-right">$1029.00</td>
-				</tr>
+				@endforeach
 				<tr>
-				<td class="text-right no-border"><strong>Shipping</strong></td>
-				<td class="text-right">$0.00</td>
-				</tr>
-				<tr>
-				<td class="text-right no-border"><strong>VAT Included in Total</strong></td>
-				<td class="text-right">$0.00</td>
-				</tr>
-				<tr>
-				<td class="text-right no-border"><div class="well well-small green"><strong>Total</strong></div></td>
-				<td class="text-right"><strong>$1029.00</strong></td>
+					<td colspan="4"></td>
+					<td colspan="1">
+						<div class="alert alert-info">
+							<div class="pull-left"> Total Bill: </div>
+							<div class="pull-right"> {{$bill->amount}} </div>
+							<div class="clearfix"></div>
+						</div>
+					</td>
 				</tr>
 			</tbody>
 	</table>

@@ -4,7 +4,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Meter extends Model {
-use SoftDeletes;
+	use SoftDeletes;
+	public $incrementing = false;
 	protected $table = 'meter';
 	protected $fillable = [
 							'id',

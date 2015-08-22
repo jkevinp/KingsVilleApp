@@ -14,6 +14,22 @@ Premium: http://www.gridgum.com
     color:white;
 }
 
+.opacity5{
+    
+    background: transparent !important;
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-bottom: 2px solid #79589F !important;
+    box-shadow:none !important;
+    outline: none !important;  
+}
+.opacity4{
+    
+    border-bottom: 2px solid #79589F !important;
+    box-shadow:none !important;
+    outline: none !important;  
+}
 
 body {
     color: #797979;

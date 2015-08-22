@@ -25,4 +25,45 @@ $(document).ready(function(){
         }
        
     });
+   
+    var isHidden = true;
+        $('#btn_search').click(function(e){
+        var c = $('#main-content');
+        var searchdiv = $('#div_search');
+        e.preventDefault();
+        if(isHidden){
+             searchdiv.fadeIn();
+             searchdiv.animate({ "right": "+=300px"
+              }, "slow" ,function(){
+                 c.css('-webkit-filter','blur(7px)');
+            c.css('-moz-filter','blur(15px)');
+            c.css('-o-filter','blur(15px)');
+            c.css('-ms-filter','blur(15px)');
+            c.css('filter' ,'blur(15px)');
+
+              } );
+           
+        }
+        else{
+             
+              searchdiv.animate({ "right": "-=300px" }, "slow"  , function(){
+                c.css('-webkit-filter','blur(0px)');
+                c.css('-moz-filter','blur(0px)');
+                c.css('-o-filter','blur(0px)');
+                c.css('-ms-filter','blur(0px)');
+                c.css('filter' ,'blur(0px)');
+                searchdiv.fadeOut();
+            });
+             
+        }
+        
+      isHidden = !isHidden;
+    });
+
+    $('[type=text]').addClass('opacity5');
+    $('[type=number]').addClass('opacity5');
+    $('[type=email]').addClass('opacity5');
+    $('[type=password]').addClass('opacity5');  
+    $('textarea').addClass('opacity5');
+    $('select').addClass('opacity4');
 });

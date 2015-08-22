@@ -31,8 +31,10 @@
 					<hr>
 					{!! $f['inject'] or '' !!}
 					{!! $f['form'] or 'no form passed' !!}
+					
 					{!! Form::submit('Submit' ,['class' => 'btn btn-theme'  ]) !!}
 					{!! Form::submit('Reset' , ['class' => 'btn btn-theme04']) !!}
+					
 					{!! Form::close() !!}
 	            </div>
 			</div>

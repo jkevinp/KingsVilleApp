@@ -5,11 +5,13 @@ use KingsVilleApp\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use KingsVilleApp\Repositories\Contracts\BillContract as bc;
+use KingsVilleApp\Repositories\Contracts\FeeContract as fc;
 
 class BillController extends Controller {
 
-	public function __construct(bc $bc){
+	public function __construct(bc $bc , fc $fc){
 		$this->bill = $bc;
+		$this->fee = $fc;
 	}
 	/**
 	 * Display a listing of the resource.
@@ -28,7 +30,7 @@ class BillController extends Controller {
 	 */
 	public function create()
 	{
-		//
+		
 	}
 
 	/**
@@ -51,11 +53,14 @@ class BillController extends Controller {
 	public function show($id)
 	{
 		if($bill = $this->bill->find($id)){
-			return view('self.blade.bill.show')->withBill($bill);
+			$billType = $bill->billType;
+			$fees = $this->fee->findAllBy('billtype_id' , $billType->first()->id);
+			return view('self.blade.bill.show')->withBill($bill)->with('fees' , $fees);
 		}
-		
-		 
 		return redirect(route('User.index'))->withErrors('Could not find bill');
+	}
+	public function listBill(){
+		return view('self.blade.bill.list')->withObj($this->bill->all())->withTitle('Bills');
 	}
 
 	/**

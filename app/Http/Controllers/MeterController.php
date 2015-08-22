@@ -8,7 +8,9 @@ use KingsVilleApp\Repositories\Contracts\MeterContract as mc;
 use KingsVilleApp\Repositories\Contracts\UserContract as uc;
 use KingsVilleApp\Repositories\Contracts\FeeContract as fc;
 use KingsVilleApp\Repositories\Contracts\BillContract as bc;
+use KingsVilleApp\Repositories\Contracts\BillTypeContract as btc;
 use KingsVilleApp\Helpers\cHelpers as c;
+use KingsVilleApp\BillingDetail;
 class MeterController extends Controller {
 
 	/**
@@ -17,16 +19,19 @@ class MeterController extends Controller {
 	 * @return Response
 	 */
 
-	public function __construct(mc $mc , uc $uc , fc $fc, bc $bc){
+	public function __construct(mc $mc , uc $uc , fc $fc, bc $bc , btc $btc){
 		$this->meter = $mc;
 		$this->user  = $uc;
 		$this->fee = $fc;
 		$this->bill = $bc;
+		$this->billtype = $btc;
 	}
 	public function createMeterReading(){
-		$meters = $this->meter->allMeter();
-		$list = $meters->lists('id' , 'id');
-		$form = [
+		return view('self.blade.meterreading.create')
+			->with('meters' ,  $this->meter->allMeter()->lists('id' , 'id'))
+			->with('billtype', $this->billtype->all()->lists('id', 'id'));
+		/*
+				$form = [
 					'meter_id' => ['type' => 'select' , 'values' => $list , 'class' => ''],
 					'readingdate' => ['type' => 'date']
 				];
@@ -37,6 +42,7 @@ class MeterController extends Controller {
 				->withInject(c::MakeForm($form))
 				->with('js' , 'default\js\ajax\meter-reading-create.js')
 				->with('col' , '6');
+				*/
 	}
 	public function createMeter(){
 		$form = $this->meter->getMeterForm();
@@ -70,34 +76,74 @@ class MeterController extends Controller {
 	public function storeMeterReading(Request $request){
 		$input = $request->all();
 		if($meterreading = $this->meter->storeMeterReading($input)){
-			$fees = $this->fee->findAllBy('transactiontype' , 'water')->lists('type' , 'rate');
-			$amount = 0;
-			$consumption = $meterreading->currentreading - $meterreading->lastreading;
-			foreach ($fees as $key => $v) {
-				if($v == 'fixed')$amount += $key;
-				else if($v =='unit')$amount += $consumption * $key;
+
+			//Bill code Start
+			if($request->has('billtype_id')){
+				$billingDetails = [];
+				$fees = $this->fee->findAllBy('billtype_id' , $input['billtype_id']);
+				$amount = 0;
+				$unitTotal = 0;
+				$consumption = $meterreading->consumption;
+				foreach ($fees as $fee) {
+					if($fee->type == 'fixed'){
+						$amount += $fee->rate;
+						$unitTotal += $fee->rate;
+						array_push($billingDetails, [
+														'id' => str_random(5),
+														'fee_id' => $fee->id,
+														'amount' => $fee->rate,
+														'unit' => 1
+													]
+								);
+					}
+					else if($fee->type =='unit'){
+						$amount += $consumption * $fee->rate;
+						$unitTotal +=$consumption * $fee->rate;
+						array_push($billingDetails, [
+														'id' => str_random(5),
+														'fee_id' => $fee->id,
+														'amount' => $consumption* $fee->rate,
+														'unit' => $consumption
+													]
+								);
+					}
+				}
+				foreach ($fees as $fee){
+					if($fee->type== 'percentage'){
+						$amount +=($unitTotal * ($fee->rate /100));
+						array_push($billingDetails, [
+														'id' => str_random(5),
+														'fee_id' => $fee->id,
+														'amount' => ($unitTotal * ($fee->rate /100)),
+														'unit' => 1
+													]
+								);
+
+					}
+				}
+				$input['meterreadings_id'] = $meterreading->id;
+				$input['amount'] = $amount;
+				$input['datestart'] = $meterreading->readingdate;
+				$input['duedate'] =   $meterreading->readingdate;
+				$input['dateend'] =   $meterreading->readingdate;
+				$input['meter_id'] =  $meterreading->meter_id;
+				$input['billtype_id'] = $input['billtype_id'];
+				$input['status'] =  'pending';
+				$bill = $this->bill->store($input);
+				for($x=  0 ; $x < count($billingDetails); $x++){
+					$billingDetails[$x]['bill_id'] = $bill->id;
+				}
+				if($bill && $meterreading && BillingDetail::insert($billingDetails)){
+					return redirect(route('User.bill.show' , $bill->id));
+					//Bill Code end
+				}else{
+					$bill->delete();
+					$meterreading->delete();
+					return redirect()->back();
+				}
 			}
-				
-			foreach ($fees as $key => $v){
-				if($v == 'percentage')$amount = $amount + ($amount * ($key /100));
-			}
-			$input['meterreadings_id'] = $meterreading->id;
+			return redirect(route('User.meter.reading.list'))->with('flash_message' , 'Meter Reading has been saved. Did not generate bill');
 			
-			$input['amount'] = $amount;
-			$input['datestart'] = $meterreading->readingdate;
-			$input['duedate'] =   $meterreading->readingdate;
-			$input['dateend'] =   $meterreading->readingdate;
-			$input['meter_id'] = $meterreading->meter_id;
-			$input['status'] =  'active';
-			dd($amount);
-			$bill = $this->bill->store($input);
-			if($bill && $meterreading){
-				return redirect(route('User.bill.show' , $bill->id));
-			}else{
-				$bill->delete();
-				$meterreading->delete();
-				return redirect()->back();
-			}
 		}
 		else return redirect()->back();
 	}
@@ -107,10 +153,13 @@ class MeterController extends Controller {
 
 	public function getMeter(Request $request){
 		$input =$request->all();
-		//$input['meterid'] = 'meterLrB20150817223802M';
+		$meter = $this->meter->findMeter($input['meterid']);
+		$billtype = $this->billtype->find($input['billtype']);
 		return 	[
-					'meter' =>   $this->meter->findMeter($input['meterid']) , 
-					'reading' => $this->meter->findMeter($input['meterid'])->meterreading->last()
+					'meter' =>  $meter, 
+					'reading' =>$meter->meterreading->last(),
+					'user' => $meter->user,
+					'billtype' =>$billtype
 				];
 	}
 	public function listMeter(){

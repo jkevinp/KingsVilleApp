@@ -28,7 +28,7 @@
   <div class="col-md-12">
     <div class="showback">
     <table class="table table-bordered table-striped table-condensed">
-    <h4><i class="fa fa-angle-right"></i> {{$title or 'list'}}<span class="badge bg-primary">{{$obj->count()}}</span></h4>
+    <h4><i class="fa fa-angle-right"></i> {{$title or 'List'}}<span class="badge bg-primary">{{$obj->count()}}</span></h4>
     <thead>                       
       <tr>
         @if($obj->count() != 0)
@@ -42,15 +42,18 @@
       <tbody>
          @foreach($obj as $t)
           <tr>
-              <td>{{$t['id']}}</td>
-              <td>{{$t['name']}}</td>
-              <td>{{$t['type']}}</td>
-              <td>{{$t['billtype']->first()->id}} => (<strong>{{$t['billtype']->first()->name}})</strong></td>
+              <td><a href="{{route('User.bill.show' , $t->id)}}">{{$t['id']}}</a></td>
               <td>{{$t['status']}}</td>
-              <td>{{$t['rate']}}
-                @if($t['type']=='percentage')
-                  %
-                @endif</td>
+              <td>{{$t['meter_id']}}</td>
+              <td>{{$t['meterreadings_id']}}</td>
+              <td>{{$t['datestart']}}</td>
+              <td>{{$t['dateend']}}</td>
+              <td>{{$t['duedate']}}</td>
+              <td>{{$t['amount']}}</td>
+              <td>{{$t['details']}}</td>
+
+            
+             
               <td>
                   <a href="{{route('User.fee.delete' , $t->id)}}" class="btn btn-danger btn-xs" title="Delete Fee"><i class="fa fa-trash-o"></i> </a>
                   <a href="{{route('User.fee.edit' , $t->id)}}" class="btn btn-xs btn-theme" title="Edit Fee"><i class="fa fa-edit"></i></a>

@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Property extends Model {
 	use SoftDeletes;
+		public $incrementing = false;
 	protected $table = 'property';
 	protected $fillable=[	'id',
 							'account_id',

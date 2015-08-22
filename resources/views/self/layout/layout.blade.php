@@ -146,7 +146,11 @@
       @yield('script')
      <script>
        $(document).ready(function () {
-           $('select.styled').customSelect();
+        $('.selectize').selectize();
+        $('select.styled').customSelect();
+
+
+
         });
     </script>
   

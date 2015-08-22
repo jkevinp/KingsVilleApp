@@ -41,10 +41,8 @@ class UserController extends Controller {
 		return view('user.blade.accounts.success')->withUser($result);
 	}
 	public function changeStatus($id){
-		if($this->user->changeStatus($id))
-			return redirect()->back()->with('flash_message' , 'Changed Status of user!');
-		else 
-			return redirect()->back()->with('errors' , 'Unable to change user status.');
+		if($this->user->changeStatus($id)) return redirect()->back()->with('flash_message' , 'Changed Status of user!');
+		else return redirect()->back()->with('errors' , 'Unable to change user status.');
 	}
 	public function show($id){
 		return view('user.blade.accounts.show')->with('users' , $users);
