@@ -16,6 +16,7 @@ $(document).ready(function(){
 		 $('#meter_id').change();
 	});
 	$('#meter_id').on('change', function(){
+		$('#tbody_fees').html('');
 		var meterid= $('#meter_id').val();
 		var billtype = '';
 		$('#owner_id').text('');
@@ -24,7 +25,8 @@ $(document).ready(function(){
 		$('#selectedbilltype_name').text('');
 		if($('#do_billing').is(":checked"))var billtype = $('#billtype_id').val();
 		$.get(page_user + 'meter/ajax/' ,{meterid: meterid , billtype: billtype } , function(data){
-			if(data.reading != null){
+			console.log(data);
+			if(data.reading != null){ 
 				$('#lastreading').val(data.reading.currentreading);
 				$('#currentreading').attr('min' , data.reading.currentreading);
 			}else {
@@ -36,6 +38,10 @@ $(document).ready(function(){
 
 			$('#selectedbilltype_id').text(data.billtype.id);
 			$('#selectedbilltype_name').text(data.billtype.name);
+			$.each(data.fee , function(index,obj){
+				$('#tbody_fees').append('<tr width="50%"><td>' +obj['name'] + '<td>' +obj['rate']);
+				
+			});
 		});
 	});
 	$('#meter_id').change();

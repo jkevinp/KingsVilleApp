@@ -1,27 +1,27 @@
 <?php namespace KingsVilleApp\Repositories\Eloquent;
-use KingsVilleApp\Repositories\Contracts\BillTypeContract;
-use KingsVilleApp\BillType;
+use KingsVilleApp\Repositories\Contracts\ExpenditureTypeContract;
+use KingsVilleApp\ExpenditureType as E;
 use KingsVilleApp\Helpers\cHelpers as c;
-class EloquentBillTypeRepository implements BillTypeContract{
+class EloquentExpenditureTypeRepository implements ExpenditureTypeContract{
 	public function find($id){
-		return BillType::find($id);
+		return E::find($id);
 	}
 	public function all(){
-		return BillType::all();
+		return E::all();
 	}
 	public function count(){
-		return BillType::all()->count();
+		return E::all()->count();
 	}
 	public function findTrash($id){
-		return BillType::onlyTrashed()->where('id','=' , $id)->first();
+		return E::onlyTrashed()->where('id','=' , $id)->first();
 	}
 	public function trashAll(){
-		return BillType::onlyTrashed()->get();
+		return E::onlyTrashed()->get();
 	}
 	public function store($param){
 		$param['id'] = c::GenerateId('bt' , str_random(1));
-		if(c::validate( $param , (new BillType)->rules))
-			return BillType::create($param);
+		if(c::validate( $param , (new E)->rules))
+			return E::create($param);
 	}
 	public function changeStatus($id){
 		$fee = $this->find($id);
@@ -36,19 +36,19 @@ class EloquentBillTypeRepository implements BillTypeContract{
 
 	}
 	public function findBy($field, $param){
-		return BillType::where($field, '=' , $param)->get()->first();
+		return E::where($field, '=' , $param)->get()->first();
 	}
 	public function findAllBy($field, $param){
-		return BillType::where($field, '=' , $param)->get();
+		return E::where($field, '=' , $param)->get();
 	}
 	public function search($query){
-		return BillType::where('firstname', 'like', '%'.$query.'%')->get();
+		return E::where('firstname', 'like', '%'.$query.'%')->get();
 	}
 	public function getForm(){
-		return (new BillType)->getForm();
+		return (new E)->getForm();
 	}
 	public function getFillable(){
-		$model = (new BillType);
+		$model = (new E);
 		$fields =  $model->form;
 		dd($fields);
 		$showableFields = [];

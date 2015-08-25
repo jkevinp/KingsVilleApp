@@ -25,6 +25,7 @@
               </a>
               <ul class="sub">
                 <li> <a  href="{{route('User.bill.list')}}" class="bill-list"><i class='fa fa-list'></i> Show All Bills</a></li>
+                <li> <a  href="{{route('User.bill.create')}}" class="bill-create"><i class='fa fa-plus'></i> Create Bill</a></li>
               </ul>
           </li>
             <li class="sub-menu">
@@ -86,7 +87,7 @@
                 <span>Meter Readings</span>
               </a>
               <ul class="sub">
-                <li> <a  href="{{route('User.meter.reading.create')}}" class="meter-reading-create"><i class='fa fa-plus'></i> Create new Meter Reading</a></li>
+                <li> <a  href="{{route('User.meter.reading.create')}}" class="meter-reading-create"><i class='fa fa-plus'></i> Create new Reading</a></li>
                 <li> <a  href="{{route('User.meter.reading.list')}}" class="meter-reading-list"><i class='fa fa-list'></i> Meter Reading List</a></li>
               </ul>
           </li>
@@ -125,11 +126,13 @@
           <li class="sub-menu">
             <a href="javascript:;" class="bill-type">
               <i class="fa fa-gears"></i>
-                <span>Bill Type</span>
+                <span>Expenditure/Bill Type</span>
               </a>
               <ul class="sub">
                 <li> <a  href="{{route('User.bill.type.list')}}" class="bill-type-list"><i class='fa fa-list'></i> Bill Type List</a></li>
                 <li> <a  href="{{route('User.bill.type.create')}}" class="bill-type-create"><i class='fa fa-plus'></i> Add new Bill Type</a></li>
+                <li> <a  href="{{route('User.expenditure.type.list')}}" class="expenditure-type-list"><i class='fa fa-list'></i> Expenditure Type List</a></li>
+                <li> <a  href="{{route('User.expenditure.type.create')}}" class="expenditure-type-create"><i class='fa fa-plus'></i> Add new Expenditure Type</a></li>
               </ul>
           </li>
           <li class="sub-menu">
@@ -146,19 +149,10 @@
 
 <div class="col-lg-3 ds col-lg-offset-9"  id="div_search" style="position:fixed; top:60px; right:-300px; z-index:9999999999; display:none;">
   <div class="">
-    <input type="text" class="opacity5 form-control text-center"  placeholder="Search" />
-  </div>   
-  <div class="desc">
-    <div class="thumb">
-      <span class="badge bg-theme">
-        <i class="fa fa-clock-o"></i>
-      </span>
-    </div>
-    <div class="details">
-      <p><muted>Title</muted><br>
-         <a href="#">Link</a>
-      </p>
-    </div>
-  </div>
+    <input type="text" class="opacity5 form-control text-center"  placeholder="Search" id="txt_search" data-url="{{route('User.ajax.search')}}"/>
+  </div> 
+  <div id="div-results">  
+ 
+</div>
 </div>
 <!--sidebar end-->

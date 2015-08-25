@@ -41,7 +41,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 							'usergroup',
 							'status' ,
 							'linktoken'
-							];
+						];
 
 	/**
 	 * The attributes excluded from the model's JSON form.

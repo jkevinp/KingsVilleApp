@@ -4,7 +4,7 @@ namespace KingsVilleApp;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-class BillType extends Model {
+class ExpenditureType extends Model {
 
 	use SoftDeletes;
 	/**
@@ -13,7 +13,7 @@ class BillType extends Model {
 	 * @var string
 	 */
 	public $incrementing = false;
-	protected $table = 'billtype';
+	protected $table = 'expendituretype';
 
 	/**
 	 * The attributes that are mass assignable.

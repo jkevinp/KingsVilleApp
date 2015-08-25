@@ -57,29 +57,31 @@
 	<table class="table">
 		<thead>
 		<tr>
-			<th style="width:60px" class="text-left">Bill detail ID</th>
+			<th style="width:60px" class="text-left">FEE NAME</th>
 			<th style="width:60px" class="text-left">UNIT/QTY</th>
-			<th style="width:60px" class="text-left">Fee Type</th>
-			<th style="width:140px" class="text-left">Fee Rate</th>
-			<th style="width:90px" class="text-left">Total</th>
+			<th style="width:60px" class="text-left">FEE TYPE</th>
+			<th style="width:140px" class="text-left">FEE RATE</th>
+			<th style="width:90px" class="text-left">TOTAL</th>
 		</tr>
 		</thead>
 			<tbody>
+				<?php $total = 0;  ?>
 				@foreach($bill->billdetail as $bd)
 				<tr>
-					<td class="text-left no-border"><strong>{{$bd->id}}</strong></td>
+					<td class="text-left no-border"><strong>{{$bd->fee->name}}</strong></td>
 					<td class="text-left">{{$bd->unit}}</td>
 					<td class="text-left">{{$bd->fee->type}}</td>
 					<td class="text-left">{{$bd->fee->rate}} @if($bd->fee->type =='percentage') % @endif </td>
 					<td class="text-left"><b>{{$bd->amount}}</b></td>
 				</tr>
+				<?php $total += $bd->amount ?>
 				@endforeach
 				<tr>
 					<td colspan="4"></td>
 					<td colspan="1">
 						<div class="alert alert-info">
 							<div class="pull-left"> Total Bill: </div>
-							<div class="pull-right"> {{$bill->amount}} </div>
+							<div class="pull-right"> {{$total}} </div>
 							<div class="clearfix"></div>
 						</div>
 					</td>

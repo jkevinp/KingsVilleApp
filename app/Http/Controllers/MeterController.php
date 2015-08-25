@@ -9,8 +9,10 @@ use KingsVilleApp\Repositories\Contracts\UserContract as uc;
 use KingsVilleApp\Repositories\Contracts\FeeContract as fc;
 use KingsVilleApp\Repositories\Contracts\BillContract as bc;
 use KingsVilleApp\Repositories\Contracts\BillTypeContract as btc;
+use KingsVilleApp\Repositories\Contracts\BillingDetailContract as bdc;
+
 use KingsVilleApp\Helpers\cHelpers as c;
-use KingsVilleApp\BillingDetail;
+use KingsVilleApp\Setting;
 class MeterController extends Controller {
 
 	/**
@@ -19,17 +21,18 @@ class MeterController extends Controller {
 	 * @return Response
 	 */
 
-	public function __construct(mc $mc , uc $uc , fc $fc, bc $bc , btc $btc){
+	public function __construct(mc $mc , uc $uc , fc $fc, bc $bc , btc $btc ,bdc $bdc ){
 		$this->meter = $mc;
 		$this->user  = $uc;
 		$this->fee = $fc;
 		$this->bill = $bc;
 		$this->billtype = $btc;
+		$this->billingdetail = $bdc;
 	}
 	public function createMeterReading(){
 		return view('self.blade.meterreading.create')
 			->with('meters' ,  $this->meter->allMeter()->lists('id' , 'id'))
-			->with('billtype', $this->billtype->all()->lists('id', 'id'));
+			->with('billtype', $this->billtype->all()->lists('name', 'id'));
 		/*
 				$form = [
 					'meter_id' => ['type' => 'select' , 'values' => $list , 'class' => ''],
@@ -79,46 +82,22 @@ class MeterController extends Controller {
 
 			//Bill code Start
 			if($request->has('billtype_id')){
-				$billingDetails = [];
 				$fees = $this->fee->findAllBy('billtype_id' , $input['billtype_id']);
 				$amount = 0;
 				$unitTotal = 0;
-				$consumption = $meterreading->consumption;
 				foreach ($fees as $fee) {
 					if($fee->type == 'fixed'){
 						$amount += $fee->rate;
 						$unitTotal += $fee->rate;
-						array_push($billingDetails, [
-														'id' => str_random(5),
-														'fee_id' => $fee->id,
-														'amount' => $fee->rate,
-														'unit' => 1
-													]
-								);
 					}
 					else if($fee->type =='unit'){
-						$amount += $consumption * $fee->rate;
-						$unitTotal +=$consumption * $fee->rate;
-						array_push($billingDetails, [
-														'id' => str_random(5),
-														'fee_id' => $fee->id,
-														'amount' => $consumption* $fee->rate,
-														'unit' => $consumption
-													]
-								);
+						$amount += $meterreading->consumption * $fee->rate;
+						$unitTotal +=$meterreading->consumption * $fee->rate;
 					}
 				}
 				foreach ($fees as $fee){
 					if($fee->type== 'percentage'){
 						$amount +=($unitTotal * ($fee->rate /100));
-						array_push($billingDetails, [
-														'id' => str_random(5),
-														'fee_id' => $fee->id,
-														'amount' => ($unitTotal * ($fee->rate /100)),
-														'unit' => 1
-													]
-								);
-
 					}
 				}
 				$input['meterreadings_id'] = $meterreading->id;
@@ -129,11 +108,10 @@ class MeterController extends Controller {
 				$input['meter_id'] =  $meterreading->meter_id;
 				$input['billtype_id'] = $input['billtype_id'];
 				$input['status'] =  'pending';
-				$bill = $this->bill->store($input);
-				for($x=  0 ; $x < count($billingDetails); $x++){
-					$billingDetails[$x]['bill_id'] = $bill->id;
-				}
-				if($bill && $meterreading && BillingDetail::insert($billingDetails)){
+				$bill = $this->bill->store($input , 'waterbill');//save the bill
+				$billingdetail = $this->billingdetail->insert($bill , $fees , $meterreading);
+				//for change bill id
+				if($bill && $meterreading && $billingdetail){
 					return redirect(route('User.bill.show' , $bill->id));
 					//Bill Code end
 				}else{
@@ -155,11 +133,13 @@ class MeterController extends Controller {
 		$input =$request->all();
 		$meter = $this->meter->findMeter($input['meterid']);
 		$billtype = $this->billtype->find($input['billtype']);
+		$fee = $this->fee->findAllBy('billtype_id' , $billtype->id);
 		return 	[
 					'meter' =>  $meter, 
 					'reading' =>$meter->meterreading->last(),
 					'user' => $meter->user,
-					'billtype' =>$billtype
+					'billtype' =>$billtype,
+					'fee' => $fee
 				];
 	}
 	public function listMeter(){

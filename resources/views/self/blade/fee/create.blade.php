@@ -6,7 +6,7 @@
         <div class="form-panel">
             <div class=" form">
                 <form class="cmxform form-horizontal style-form" method="post" action="{{$route or ''}}">
-                <input type="hidden" name="_token" value="jZTfEjMdGsNUZwDptAt9lvaD5KOaZNvhFeYdOcdS">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <h2 class="violet">Create new Fee</h2>
                 <hr>
                 <div class="form-group ">

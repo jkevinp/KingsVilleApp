@@ -5,13 +5,15 @@ use KingsVilleApp\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use KingsVilleApp\Repositories\Contracts\BillContract as bc;
+use KingsVilleApp\Repositories\Contracts\BillTypeContract as btc;
 use KingsVilleApp\Repositories\Contracts\FeeContract as fc;
 
 class BillController extends Controller {
 
-	public function __construct(bc $bc , fc $fc){
+	public function __construct(bc $bc , fc $fc ,btc $btc){
 		$this->bill = $bc;
 		$this->fee = $fc;
+		$this->billtype = $btc;
 	}
 	/**
 	 * Display a listing of the resource.
@@ -30,7 +32,8 @@ class BillController extends Controller {
 	 */
 	public function create()
 	{
-		
+		return view('self.blade.bill.create')
+		->with('billtype', $this->billtype->all()->lists('name', 'id'));
 	}
 
 	/**

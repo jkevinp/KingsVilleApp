@@ -8,37 +8,21 @@
                     <div class=" form">
                         <form class="cmxform form-horizontal style-form"  method="post" action="{{$route or 'http://localhost:8000/user/meter-reading/store'}}">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                            <h2 class="violet">Create new Meter Reading</h2>
+                            <h2 class="violet">Create new Bill</h2>
                             <hr>
-                            <div class="form-group ">
-                                <label for="meter_id" class="control-label col-lg-2">Generate Bill?</label>		
-                                <div class="col-lg-10 switch-on">
-                                	 <input type="checkbox" id="do_billing" checked="true">
-                 				</div>
-                            </div>
                             <div class="form-group" id="billing_container">
                                 <label for="billtype_id" class="control-label col-lg-2">Bill Type*</label>		
                                 <div class="col-lg-10">
-                                	 {!! Form::select('billtype_id',  $billtype , null, ['id' => 'billtype_id', 'class' => 'selectize']) !!}
+                                	{!! Form::select('billtype_id',  $billtype , null, ['id' => 'billtype_id', 'class' => 'selectize']) !!}
                  				</div>
                             </div>
                             <div class="form-group ">
-                                <label for="meter_id" class="control-label col-lg-2">Meter_id*</label>		
-                                <div class="col-lg-10">
-                                	 {!! Form::select('meter_id',  $meters , null, ['id' => 'meter_id', 'class' => 'selectize']) !!}
-                 				</div>
-                            </div>
-                            <div class="form-group ">
-                                <label for="readingdate" class="control-label col-lg-2">Readingdate*</label>		
+                                <label for="readingdate" class="control-label col-lg-2">Start Date*</label>     
                                 <div class="col-lg-10"><input name="readingdate"class="form-control input-medium default-date-picker" size="16" type="text"></div>
                             </div>
                             <div class="form-group ">
-                                <label for="lastreading" class="control-label col-lg-2">Lastreading*</label>		
-                                <div class="col-lg-10"><input readonly="" class="form-control" id="lastreading" placeholder="Lastreading" required="" name="lastreading" type="number"></div>
-                            </div>
-                            <div class="form-group ">
-                                <label for="currentreading" class="control-label col-lg-2">Currentreading*</label>		
-                                <div class="col-lg-10"><input ="" class="form-control" id="currentreading" placeholder="Currentreading" required="" name="currentreading" type="number"></div>
+                                <label for="readingdate" class="control-label col-lg-2">End Date*</label>     
+                                <div class="col-lg-10"><input name="datestart"class="form-control input-medium default-date-picker" size="16" type="text"></div>
                             </div>
                             <div class="form-group ">
                                 <label for="details" class="control-label col-lg-2">Details*</label>		
@@ -62,33 +46,35 @@
                         <div class="form-group ">
                             <label for="selectedbilltype_id" class="control-label col-lg-2">ID:</label>		
                             <div class="col-lg-10">
-                            	 <span class="alert alert-info col-lg-12" id="selectedbilltype_id"></span>
+                            	 <div class="well" id="selectedbilltype_id"></div>
              				</div>
                         </div>
                         <div class="form-group ">
-                            <label for="selectedbilltype_name" class="control-label col-lg-2">Name:</label>		
+                            <label for="selectedbilltype_name" class="control-label col-lg-2">Name:</label>     
                             <div class="col-lg-10">
-                            	 <span class="alert alert-info col-lg-12" id="selectedbilltype_name"></span>
-             				</div>
+                                 <div class="well" id="selectedbilltype_name"></div>
+                            </div>
                         </div>
                         <h2 class="violet">Fees Included</h2>
-                            <section id="no-more-tables"> 
-                                <table class="table table-bordered table-striped table-condensed cf">
-                                    <h4><i class="fa fa-angle-right"></i> Fees Included<span class="badge bg-primary"></span></h4>
-                                    <thead class="cf">                       
-                                        <tr>
-                                            <th>Fee Name</th>
-                                            <th>Fee Amount</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="tbody_fees">
+                        <section id="no-more-tables"> 
+                            <table class="table table-bordered table-striped table-condensed cf">
+                                <h4><i class="fa fa-angle-right"></i> Fees Included<span class="badge bg-primary"></span></h4>
+                                <thead class="cf">                       
+                                    <tr>
+                                        <th>Fee Name</th>
+                                        <th>Fee Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody_fees">
                                        
-                                    </tbody>
+                                </tbody>
                             </table>      
-                            </section>
+                        </section>
+                      
                     </form>
                 </div>
             </div>
+
         </div>
         <div class="col-lg-6">
             <div class="form-panel">
@@ -100,13 +86,13 @@
                         <div class="form-group ">
                             <label for="meter_id" class="control-label col-lg-2">ID:</label>		
                             <div class="col-lg-10">
-                            	 <span class="alert alert-info col-lg-12" id="owner_id"></span>
+                            	 <div class="well" id="owner_id"></div>
              				</div>
                         </div>
                         <div class="form-group ">
                             <label for="meter_id" class="control-label col-lg-2">Name:</label>		
                             <div class="col-lg-10">
-                            	 <span class="alert alert-info col-lg-12" id="owner_name"></span>
+                            	 <div class="well" id="owner_name"></div>
              				</div>
                         </div>
 
@@ -120,5 +106,5 @@
 @stop
 
 @section('script')
-{!! Html::script('default\js\ajax\meter-reading-create.js')!!}
+{!! Html::script('default\js\ajax\bill-create.js')!!}
 @stop

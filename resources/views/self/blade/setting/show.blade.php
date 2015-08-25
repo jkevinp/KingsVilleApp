@@ -43,24 +43,15 @@
       <tbody>
          @foreach($obj as $t)
           <tr>
-              <td data-title="{{$t['fillable'][0]}}"><a href="{{route('User.bill.show' , $t->id)}}">{{$t['id']}}</a></td>
-              <td data-title="{{$t['fillable'][1]}}"> {{$t['status']}}</td>
-              <td data-title="{{$t['fillable'][2]}}">{{$t['meter_id']}}</td>
-              <td data-title="{{$t['fillable'][3]}}">{{$t['meterreadings_id']}}</td>
-              <td data-title="{{$t['fillable'][4]}}">{{$t['billtype_id']}}</td>
-              <td data-title="{{$t['fillable'][5]}}">{{$t['datestart']}}</td>
-              <td data-title="{{$t['fillable'][6]}}">{{$t['dateend']}}</td>
-              <td data-title="{{$t['fillable'][7]}}">{{$t['duedate']}}</td>
-              <td data-title="{{$t['fillable'][8]}}">{{$t['amount']}}</td>
-              <td data-title="{{$t['fillable'][9]}}">{{$t['details']}}</td>
+              <td  data-title="{{$t['fillable'][0]}}"><a href="{{route('User.bill.show' , $t->id)}}">{{$t['id']}}</a></td>
+              <td contenteditable="true" data-title="{{$t['fillable'][1]}}"> {{$t['name']}}</td>
+              <td contenteditable="true" data-title="{{$t['fillable'][2]}}">{{$t['target_table']}}</td>
+              <td contenteditable="true" data-title="{{$t['fillable'][3]}}">{{$t['target_column']}}</td>
+              <td contenteditable="true" data-title="{{$t['fillable'][4]}}">{{$t['value']}}</td>
+              <td contenteditable="true" data-title="{{$t['fillable'][5]}}">{{$t['user_id']}}</td>
+          
               <td data-title="actions">
-                  <a href="{{route('User.fee.delete' , $t->id)}}" class="btn btn-danger btn-xs" title="Delete Fee"><i class="fa fa-trash-o"></i> </a>
                   <a href="{{route('User.fee.edit' , $t->id)}}" class="btn btn-xs btn-theme" title="Edit Fee"><i class="fa fa-edit"></i></a>
-                  @if($t->status =='inactive') 
-                  <a href="{{route('User.fee.changestatus' ,   $t->id)}}" class="btn btn-xs btn-theme03" title="Activate Fee"><i class="fa fa-power-off"></i></a> 
-                  @else
-                  <a href="{{route('User.fee.changestatus' ,   $t->id )}}" class="btn btn-xs btn-theme04" title="Deactivate Fee"><i class="fa fa-power-off"></i></a>
-                  @endif
               </td>
           </tr>
     @endforeach

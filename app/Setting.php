@@ -4,23 +4,18 @@ namespace KingsVilleApp;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-class Bill extends Model {
-
+class Setting extends Model {
 	use SoftDeletes;
-	public $incrementing = false;
-	protected $table = 'bill';
+	public $incrementing = true;
+	protected $table = 'setting';
 	protected $dates = ['deleted_at' , 'created_at' , 'updated_at' , 'datestart' , 'dateend' ,'duedate'];
 	protected $fillable = 	[
 								'id',
-								'status',
-								'meter_id',
-								'meterreadings_id',
-								'billtype_id',
-								'datestart',
-								'dateend',
-								'duedate',
-								'amount',
-								'details',
+								'name',
+								'target_table',
+								'target_column',
+								'value',
+								'user_id'
 							];
 	public $hidefields = [];
 	public $form =  [
@@ -35,24 +30,14 @@ class Bill extends Model {
 						'rate' =>   ['type' => 'number']
 					];
 	public $rules = [
-						'waterbill' => [
-										'id' => 'required|unique:bill',
-										'status' => 'required',
-										'meter_id' => 'required|exists:meter,id',
-										'datestart' => 'required|date',
-										'dateend'   => 'required|date',
-										'duedate' =>'required|date',	
-										'amount'  => 'required|numeric|min:0',
-										'meterreadings_id' => 'required|exists:meterreadings,id'
-										],
-						'generic' => [
-										'id' => 'required|unique:bill',
-										'status' => 'required',
-										'datestart' => 'required|date',
-										'dateend'   => 'required|date',
-										'duedate' =>'required|date',	
-										'amount'  => 'required|numeric|min:0'
-										]
+						'id' => 'required|unique:bill',
+						'status' => 'required',
+						'meter_id' => 'required|exists:meter,id',
+						'datestart' => 'required|date',
+						'dateend'   => 'required|date',
+						'duedate' =>'required|date',	
+						'amount'  => 'required|numeric|min:0',
+						'meterreadings_id' => 'required|exists:meterreadings,id'
 					];
 	public function getForm(){
 		return Helpers\cHelpers::MakeForm($this->form);

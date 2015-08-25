@@ -66,4 +66,68 @@ $(document).ready(function(){
     $('[type=password]').addClass('opacity5');  
     $('textarea').addClass('opacity5');
     $('select').addClass('opacity4');
+    $('#btn-save').hide();
+    $('.edit').click(function(){
+        toggleEditMode($(this));
+    });
+    $('#btn-save').click(function(){
+        save($(this));
+    });
+    $('#txt_search').on('keyup' , function(){
+        setTimeout(search($(this)), 5000);
+    });
 });
+function search(elem){
+   var value = elem.val();
+   var url = elem.data('url');
+   $.get(url , {value : value} , function(result){
+        var divResult=  $('#div-results');
+      var x= '<div class="desc"><div class="thumb"><span class="badge bg-theme"><i class="fa fa-clock-o"></i>';
+      var y= '</span></div><div class="details"><p><muted>';
+      
+      var z ='</muted><br> <a href="#">Link</a></p></div></div>';
+        $.each(result , function(i,obj){
+            console.log(obj.id);
+            divResult.append(x);
+            divResult.append(y);
+            divResult.append(obj.id);
+            divResult.append(z);
+        });
+   } ,'json');
+}
+
+function save(elem){
+    elem.html('Saving..<i class="fa fa-circle-o-notch fa-spin"></i>');
+    var data = elem.data();
+    var val = $('#value-' + data.id).text();
+    $.ajax({
+            url : data.url,
+            type: 'post',
+            data: {
+                type : data.type, 
+                id : data.id ,
+                value : val
+            },
+            dataType:'json',
+            headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') },
+    }).fail(function(error){
+        bootbox.alert('error');
+    }).done(function(result){
+          elem.html('<i class="fa fa-floppy-o"> </i>');
+    });
+}
+function toggleEditMode(elem){
+    var elementid = elem.data('id');
+    var searchname = '.editable-' +elementid;
+    var saveBtn = '.save-' + elementid;
+    var enabled =  $(searchname).attr('contenteditable');
+    if(enabled === 'true'){
+        enabled = false;
+         $(saveBtn).fadeOut();
+    }
+    else{
+        enabled = true;
+        $(saveBtn).fadeIn();
+    } 
+    $(searchname).attr('contenteditable' , enabled);
+}

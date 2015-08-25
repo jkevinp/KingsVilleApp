@@ -4,24 +4,24 @@ use KingsVilleApp\Http\Requests;
 use KingsVilleApp\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
-use KingsVilleApp\Repositories\Contracts\BillTypeContract as btc;
+use KingsVilleApp\Repositories\Contracts\ExpenditureTypeContract as etc;
 use Response;
 use Auth;
-class BillTypeController extends Controller {
+class ExpenditureTypeController extends Controller {
 
 	/**
 	 * Display a listing of the resource.
 	 *
 	 * @return Response
 	 */
-	public function __construct(btc $btc){
-		$this->billtype = $btc;
+	public function __construct(etc $etc){
+		$this->expendituretype = $etc;
 	}
 
 	public function listBillType()
 	{
-		$obj = $this->billtype->all();
-		return view('self.blade.billtype.list')->withObj($obj)->withTitle('Bill type list');
+		$obj = $this->expendituretype->all();
+		return view('self.blade.expendituretype.list')->withObj($obj)->withTitle('Expenditure type list');
 	}
 
 	/**
@@ -31,9 +31,9 @@ class BillTypeController extends Controller {
 	 */
 	public function create(){
 		return view('self.blade.empty.form')
-		->withForm($this->billtype->getForm())
-		->with('formTitle','Create new bill type')
-		->withRoute(route('User.bill.type.store'));
+		->withForm($this->expendituretype->getForm())
+		->with('formTitle','Create new Expenditure type')
+		->withRoute(route('User.expenditure.type.store'));
 	}
 
 	/**
@@ -45,15 +45,15 @@ class BillTypeController extends Controller {
 	{
 		$input = $request->all();
 		$input['user_id'] = Auth::user()->id;
-		if($billtype = $this->billtype->store($input)){
-			return redirect()->back()->with('flash_message' , 'Bill Type has been added.');
+		if($billtype = $this->expendituretype->store($input)){
+			return redirect()->back()->with('flash_message' , 'Expenditure Type has been added.');
 		}
 		return redirect()->back();
 	}
 	public function search(Request $request){
 		$input = $request->all();
 		if($request->ajax() && $request->has('id')){
-			return $this->billtype->findBy('id' , $request['id']);
+			return $this->expendituretype->findBy('id' , $request['id']);
 		}else 
 			return Response::json(['error' => 'Input missing or not ajax' ]);
 	}

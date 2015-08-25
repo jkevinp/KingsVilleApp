@@ -17,6 +17,8 @@ Route::get('/f', function(){
 
 // cubic feet (ft.3) or US gallons
 // cubic metres (m3) or litres
+
+
 Route::group(['prefix' => 'user'] , function(){
 
 	Route::get('/index/', 'UserController@index');
@@ -71,6 +73,7 @@ Route::group(['prefix' => 'user'] , function(){
 		Route::get('/store/' ,['uses' => 'BillController@store' , 'as' => 'User.bill.store']);
 		Route::get('/show/{id}' , ['uses' => 'BillController@show' , 'as' => 'User.bill.show']);
 		Route::get('/list/' , ['uses' => 'BillController@listBill' , 'as' => 'User.bill.list']);
+		Route::get('/create/' , ['uses' => 'BillController@create' , 'as' => 'User.bill.create']);
 	});
 
 
@@ -84,7 +87,14 @@ Route::group(['prefix' => 'user'] , function(){
 		Route::get('/create/' , ['uses' => 'BillTypeController@create' , 'as' => 'User.bill.type.create']);
 		Route::post('/store/' , ['uses' => 'BillTypeController@store' , 'as' => 'User.bill.type.store']);
 		Route::get('/list/' ,   ['uses' => 'BillTypeController@listBillType' , 'as' => 'User.bill.type.list']);
-		Route::get('/search/' ,   ['uses' => 'BillTypeController@search' , 'as' => 'User.bill.type.ajax']);
+		Route::get('/search/' , ['uses' => 'BillTypeController@search' , 'as' => 'User.bill.type.ajax']);
+	});
+
+	Route::group(['prefix' => 'expenditure-type'] , function(){
+		Route::get('/create/' , ['uses' => 'ExpenditureTypeController@create' , 'as' => 'User.expenditure.type.create']);
+		Route::post('/store/' , ['uses' => 'ExpenditureTypeController@store' , 'as' => 'User.expenditure.type.store']);
+		Route::get('/list/' ,   ['uses' => 'ExpenditureTypeController@listBillType' , 'as' => 'User.expenditure.type.list']);
+		Route::get('/search/' , ['uses' => 'ExpenditureTypeController@search' , 'as' => 'User.expenditure.type.ajax']);
 	});
 
 
@@ -92,6 +102,11 @@ Route::group(['prefix' => 'user'] , function(){
 		Route::get('/create/' , ['uses' => 'ContentsController@create' , 'as' => 'User.content.create']);
 		Route::get('/list/' , ['uses' => 'ContentsController@listContent' , 'as' => 'User.content.list']);
 		Route::post('/save/' ,  ['uses' => 'ContentsController@store' , 'as' => 'User.content.store']);
+	});
+	Route::group(['prefix' => 'ajaxify'] , function(){
+		Route::post('/save/' ,  ['uses' => 'AjaxController@store' , 'as' => 'User.ajax.store']);
+		Route::get('/search/' ,  ['uses' => 'AjaxController@search' , 'as' => 'User.ajax.search']);
+		Route::get('/get/' ,  ['uses' => 'AjaxController@get' , 'as' => 'User.ajax.get']);
 	});
 
 	Route::group(['prefix' => 'reservation'] , function(){
@@ -133,13 +148,16 @@ Route::group(['prefix' => 'user'] , function(){
 	
 	//User Panel= homeowner section
 	Route::group(['prefix' => 'homeowner'] , function(){
-	Route::group(['prefix' => 'account'] , function(){
-		//Route::get('/create/', ['uses' => 'HomeOwnerController@create' , 'as' => 'User.HomeOwner.account.create']);
-		//Route::get('/search/', ['uses' => 'HomeOwnerController@search' , 'as' => 'User.HomeOwner.account.search']);
-		//Route::get('/create/success', ['uses' => 'HomeOwnerController@store' , 'as' => 'User.HomeOwner.account.create.success']);
+		Route::group(['prefix' => 'account'] , function(){
+			//Route::get('/create/', ['uses' => 'HomeOwnerController@create' , 'as' => 'User.HomeOwner.account.create']);
+			//Route::get('/search/', ['uses' => 'HomeOwnerController@search' , 'as' => 'User.HomeOwner.account.search']);
+			//Route::get('/create/success', ['uses' => 'HomeOwnerController@store' , 'as' => 'User.HomeOwner.account.create.success']);
+		});
 	});
+	Route::group(['prefix' => 'settings'] , function(){
+		Route::get('/show/' , ['uses' => 'SettingsController@show' , 'as' => 'User.settings.show']);
 	});
-});
+});	
 
 
 

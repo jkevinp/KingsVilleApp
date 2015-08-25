@@ -18,10 +18,10 @@ class EloquentBillRepository implements BillContract{
 	public function trashAll(){
 		return Bill::onlyTrashed()->get();
 	}
-	public function store($param){
+	public function store($param , $type){
 		$param['id'] = c::GenerateId('bill' , str_random(5));
 		$param['status']= 'due';
-		if(c::validate( $param , (new Bill)->rules))
+		if(c::validate( $param , (new Bill)->rules[$type]))
 			return Bill::create($param);
 	}
 	public function changeStatus($id){

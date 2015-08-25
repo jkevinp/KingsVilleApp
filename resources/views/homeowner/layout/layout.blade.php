@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta name="_token" content="{!! csrf_token() !!}"/>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
@@ -17,6 +18,7 @@
     <!-- Custom styles for this template -->
     <link href="{{URL::asset('homeowner')}}/css/style.css" rel="stylesheet">
     <link href="{{URL::asset('homeowner')}}/css/style-responsive.css" rel="stylesheet">
+    <link href="{{URL::asset('default')}}/css/table-responsive.css" rel="stylesheet">
     <link href="{{URL::asset('homeowner')}}/css/lightbox.css" rel="stylesheet">
    
     @yield('header')
